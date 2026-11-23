@@ -1,30 +1,8 @@
 import React from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { getClientes } from '../shared/api/clientes.api';
-import { getCarros } from '../shared/api/carros.api';
-import { getModelos } from '../shared/api/modelos.api';
-import { getMarcas } from '../shared/api/marcas.api';
-import SearchMenu from './search-menu';
 
 function Navbar() {
-  const [dados, setDados] = React.useState({});
-  const [pesquisa, setPesquisa] = React.useState();
-
-  React.useEffect(() => {
-    
-  }, []);
-
-
-  
-
-  const pesquisar = (e) => {
-    const novoValor = e.target.value;
-
-    setPesquisa(novoValor);
-
-
-  };
   return (
     <nav className="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
       <div className="container-fluid">
@@ -56,8 +34,7 @@ function Navbar() {
             </li>
           </ul>
           <form className="d-flex">
-            <input className="form-control me-sm-2 rounded-pill" style={{ width: "600px" }} type="search" onChange={pesquisar} placeholder="Pesquise carros, clientes..." />
-            <SearchMenu visibility={'visible'} data={''} />
+            <input className="form-control me-sm-2 rounded-pill" style={{ width: "600px" }} type="search" placeholder="Pesquise carros, clientes..." />
           </form>
         </div>
       </div>
