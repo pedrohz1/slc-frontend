@@ -1,23 +1,25 @@
 import React from 'react';
-
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
-
-import '../custom.css';
-
 import { useNavigate } from 'react-router-dom';
-
 import Stack from '@mui/material/Stack';
 
-import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import '../custom.css';
+import { mensagemSucesso, mensagemErro } from '../components/toastr';
 import SearchBar from '../components/search-bar';
 import CardLocacao from '../components/card-locacao';
 
+import { getLocacoes } from '../api/locacoes.api';
+import { getCarros } from '../api/carros.api';
+
+import axios from 'axios';
+import { BASE_URL } from '../config/axios';
+
 const baseURL = `${BASE_URL}/locacoes`;
-const carsURL = `${BASE_URL}/carros`;
 
 function ListagemLocacoes() {
   const navigate = useNavigate();
+
+  const [dados, setDados] = React.useState([]);
+  const [pesquisa, setPesquisa] = React.useState('');
 
   const cadastrar = () => {
     navigate(`/cadastro-locacoes`);
@@ -27,22 +29,22 @@ function ListagemLocacoes() {
     navigate(`/cadastro-locacoes/${id}`);
   };
 
-  const [dados, setDados] = React.useState([]);
-  const [pesquisa, setPesquisa] = React.useState('');
-
-  const [carros, setCarros] = React.useState([]);
-
   const filtrarDados = () => {
     const consulta = String(pesquisa).trim().toLowerCase();
-
     if (!consulta) return dados;
 
-    return dados.filter((e) =>
-      Object.values(e).some((texto) =>
+    return dados.filter((e) => {
+      const valores = [
+        ...Object.values(e),
+        ...(typeof e.carro === 'object' && e.carro ? Object.values(e.carro) : []),
+        ...(typeof e.usuario === 'object' && e.usuario ? Object.values(e.usuario) : []),
+      ];
+
+      return valores.some((texto) =>
         String(texto ?? '').toLowerCase().includes(consulta)
-      )
-    )
-  }
+      );
+    });
+  };
 
   async function excluir(id) {
     let data = JSON.stringify({ id });
@@ -68,17 +70,12 @@ function ListagemLocacoes() {
   React.useEffect(() => {
     async function carregarDados() {
       try {
-        const resLocacoes = await axios.get(baseURL);
-        const resCarros = await axios.get(carsURL);
-
-        const listaLocacoes = resLocacoes.data || [];
-        const listaCarros = resCarros.data || [];
-
-        setCarros(listaCarros);
+        const listaLocacoes = (await getLocacoes()) || [];
+        const listaCarros = (await getCarros()) || [];
 
         const dadosCorrigidos = listaLocacoes.map((locacao) => ({
           ...locacao,
-          carro: listaCarros.find((c) => c.id === locacao.carro),
+          carro: listaCarros.find((c) => c.id === locacao.carro) || locacao.carro,
         }));
 
         setDados(dadosCorrigidos);
@@ -90,23 +87,30 @@ function ListagemLocacoes() {
     carregarDados();
   }, []);
 
-
-  if (!dados) return null;
-  if (!carros) return null;
-
   return (
     <div className='container'>
       <Stack
         direction='row'
         justifyContent='space-between'
         alignItems='center'
-        spacing={80}
         sx={{ mb: 2 }}
       >
-        <SearchBar label={"Pesquisar locações"} onSearch={setPesquisa} />
+        <SearchBar label={'Pesquisar locações'} onSearch={setPesquisa} />
       </Stack>
+
       {filtrarDados().map((dado) => (
-        <CardLocacao car={dado.carro} client={dado.usuario} image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdTCBZ8Vj6fLHLkS3jZ1LwRqKAHX6UcgO4Yms2aKSjA&s=10"} date={{retirada: dado.dataRetirada, devolucao: dado.dataDevolucao}} status={"Em andamento"}></CardLocacao>
+        <CardLocacao
+          key={dado.id}
+          car={dado.carro}
+          client={dado.usuario}
+          image={
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTED2szINWNChABYAH7j6QFIIl6m5rY4cFS-KqAYlL3JA&s=10'
+          }
+          date={{ retirada: dado.dataRetirada, devolucao: dado.dataDevolucao }}
+          status={dado.status}
+          onEdit={() => editar(dado.id)}
+          onDelete={() => excluir(dado.id)}
+        />
       ))}
     </div>
   );
