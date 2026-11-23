@@ -15,8 +15,8 @@ function Login() {
   }
 
   return (
-    <div className='container-fluid'>
-      <div className='row min-vh-100'>
+    <div className='container-fluid p-0'>
+      <div className='row g-0 min-vh-100'>
         <div className='col-12 col-lg-6 d-flex align-items-center justify-content-center p-4 p-sm-5'>
           <div className='w-100' style={{ maxWidth: '400px' }}>
             <div className='mb-4'>
