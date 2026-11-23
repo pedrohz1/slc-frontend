@@ -6,6 +6,7 @@ import CadastroCarros from '../../views/cadastro/cadastro-carros';
 import CadastroClientes from '../../views/cadastro/cadastro-clientes';
 import CadastroLocacoes from '../../views/cadastro/cadastro-locacoes';
 import CadastroMultas from '../../views/cadastro/cadastro-multas';
+import CadastroLocais from '../../views/cadastro/cadastro-locais';
 import ListagemMarcas from '../../views/listagem/listagem-marcas';
 import ListagemModelos from '../../views/listagem/listagem-modelos';
 import ListagemCategorias from '../../views/listagem/listagem-categorias';
@@ -14,6 +15,7 @@ import ListagemCaracteristicas from '../../views/listagem/listagem-caracteristic
 import ListagemLocacoes from '../../views/listagem/listagem-locacoes';
 import ListagemClientes from '../../views/listagem/listagem-clientes';
 import ListagemMultas from '../../views/listagem/listagem-multas';
+import ListagemLocais from '../../views/listagem/listagem-locais';
 import Login from '../../views/login';
 import Homepage from '../../views/homepage';
 import Layout from '../../components/layout';
@@ -36,6 +38,7 @@ function Rotas(){
                     <Route path='/cadastro-carros/:idParam?' element={<CadastroCarros />} />
                     <Route path='/cadastro-clientes/:idParam?' element={<CadastroClientes />} />
                     <Route path='/cadastro-locacoes/:idParam?' element={<CadastroLocacoes />} />
+                    <Route path='/cadastro-locais/:idParam?' element={<CadastroLocais />} />
                     <Route path='/cadastro-multas/:idParam?' element={<CadastroMultas />} />
                     <Route path='/listagem-marcas' element={<ListagemMarcas />} />
                     <Route path='/listagem-modelos' element={<ListagemModelos />} />
@@ -45,6 +48,7 @@ function Rotas(){
                     <Route path='/listagem-locacoes' element={<ListagemLocacoes />} />
                     <Route path='/listagem-clientes' element={<ListagemClientes />} />
                     <Route path='/listagem-multas' element={<ListagemMultas />} />
+                    <Route path='/listagem-locais' element={<ListagemLocais />} />
                 </Route>
             </Routes>
         </BrowserRouter>
