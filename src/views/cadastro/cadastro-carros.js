@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Stack from '@mui/material/Stack';
+import Chip from '../../components/chip';
 
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
@@ -13,6 +14,7 @@ import { getCarroById, createCarro, updateCarro } from '../../shared/api/carros.
 
 import '../../custom.css';
 import CarFormGroup from '../../components/car-form-group';
+import { getCaracteristicas } from '../../shared/api/caracteristicas.api';
 
 function CadastroCarros() {
     const { idParam } = useParams();
@@ -28,6 +30,8 @@ function CadastroCarros() {
     const [kmRodados, setKmRodados] = useState('');
     const [caracteristicas, setCaracteristicas] = useState([]);
     const [url, setUrl] = useState('');
+
+    const [opcoesCaracteristicas, setOpcoesCaracteristicas] = useState([]);
 
     const [dados, setDados] = useState([]);
 
@@ -81,6 +85,15 @@ function CadastroCarros() {
     }
 
     async function buscar() {
+
+        const listaCaracteristicas = await getCaracteristicas();
+        setOpcoesCaracteristicas(
+            listaCaracteristicas.map((c) => ({
+                value: c.id,
+                label: c.nome,
+            }))
+        );
+
         if (idParam) {
             await getCarroById(idParam).then((dado) => {
                 setDados(dado);
@@ -112,7 +125,7 @@ function CadastroCarros() {
                     image={`${url}`}
                     className="object-fit-contain w-50"
                 />
-                <Box className='w-100 bg-secondary' sx={{ display: 'flex', flexDirection: 'column'}}>
+                <Box className='w-100 bg-secondary' sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <div className='bs-component'>
                             <CarFormGroup label='Placa: *' htmlFor='inputPlaca'>
@@ -178,16 +191,12 @@ function CadastroCarros() {
                                     <option value='não disponível'>Não disponível</option>
                                 </select>
                             </CarFormGroup>
-                            <CarFormGroup label='Características: *' htmlFor='inputCaracteristicas'>
-                                <input
-                                    type='text'
-                                    id='inputCaracteristicas'
-                                    value={caracteristicas}
-                                    className='form-control rounded-4 m-1'
-                                    name='caracteristicas'
-                                    onChange={(e) => setCaracteristicas(e.target.value)}
-                                />
-                            </CarFormGroup>
+                            <Chip
+                                name="Características"
+                                options={opcoesCaracteristicas}
+                                value={caracteristicas}
+                                onChange={setCaracteristicas}
+                            />
                             <CarFormGroup label='URL da foto: *' htmlFor='inputUrl'>
                                 <input
                                     type='text'
