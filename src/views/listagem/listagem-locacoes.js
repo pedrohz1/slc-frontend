@@ -6,6 +6,7 @@ import '../../custom.css';
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
 import CardLocacao from '../../components/card-locacao';
+import AddIcon from '@mui/icons-material/Add';
 
 import { getLocacoes } from '../../api/locacoes.api';
 import { getCarros } from '../../api/carros.api';
@@ -112,6 +113,14 @@ function ListagemLocacoes() {
           onDelete={() => excluir(dado.id)}
         />
       ))}
+      <button
+        type='button'
+        className="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow p-0 d-flex align-items-center justify-content-center"
+        style={{ width: '75px', height: '75px', aspectRatio: '1 / 1', }}
+        onClick={() => cadastrar()}
+      >
+        <AddIcon style={{ fontSize: '36px' }} />
+      </button>
     </div>
   );
 }
