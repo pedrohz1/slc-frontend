@@ -1,8 +1,24 @@
 import React from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 
 function Navbar() {
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput ] = useState("");
+
+  const searchSubmit = (e) => {
+    e.preventDefault();
+
+    if(!searchInput) {
+      return;
+    }
+
+    return navigate(`/search/${searchInput}`);
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
       <div className="container-fluid">
@@ -33,8 +49,24 @@ function Navbar() {
               </div>
             </li>
           </ul>
-          <form className="d-flex">
-            <input className="form-control me-sm-2 rounded-pill" style={{ width: "600px" }} type="search" placeholder="Pesquise carros, clientes..." />
+          <form className="d-flex" onSubmit={searchSubmit}>
+            <div className="position-relative me-sm-2">
+              <input
+                className="form-control rounded-pill pe-5"
+                style={{ width: "600px" }}
+                type="search"
+                placeholder="Pesquise carros, clientes..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="btn btn-link position-absolute top-50 end-0 translate-middle-y me-2 p-1 text-secondary"
+                aria-label="Pesquisar"
+              >
+                <SearchIcon />
+              </button>
+            </div>
           </form>
         </div>
       </div>
