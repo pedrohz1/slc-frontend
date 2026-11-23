@@ -2,11 +2,16 @@ import React from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
 import 'toastr/build/toastr.min';
 import 'toastr/build/toastr.css';
-import Rotas from './app/routes/rotas.js';
+import Rotas from './routes/routes.js';
+import { AuthProvider } from '../context/auth.context.js';
 
 class App extends React.Component {
   render() {
-    return <Rotas />;
+    return (
+      <AuthProvider>
+        <Rotas />
+      </AuthProvider>
+    )
   }
 }
 
