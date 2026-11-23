@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Card from "../components/card";
 import { mensagemErro } from "../components/toastr";
@@ -11,9 +11,12 @@ import { getMarcas } from "../shared/api/marcas.api";
 import { getCategorias } from "../shared/api/categorias.api";
 import { getCaracteristicas } from "../shared/api/caracteristicas.api";
 import { getClientes } from "../shared/api/clientes.api";
+import { IconButton } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 
 function SearchResults() {
     const { idParam } = useParams();
+    const navigate = useNavigate();
 
     const [ carros, setCarros ] = useState([]);
     const [ modelos, setModelos ] = useState([]);
@@ -163,12 +166,12 @@ function SearchResults() {
                                                 <td key={coluna.label}>{coluna.valor(item)}</td>
                                             ))}
                                             <td className="text-end">
-                                                <Link
-                                                    to={`${grupo.rota}/${item.id}`}
-                                                    className="btn btn-sm btn-outline-primary"
+                                                <IconButton
+                                                    aria-label='edit'
+                                                    onClick={() => navigate(`${grupo.rota}/${item.id}`)}
                                                 >
-                                                    Editar
-                                                </Link>
+                                                    <EditIcon />
+                                                </IconButton>
                                             </td>
                                         </tr>
                                     ))}
