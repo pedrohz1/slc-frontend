@@ -93,11 +93,11 @@ function ListagemCarros() {
               <table className='table table-hover'>
                 <thead>
                   <tr>
+                    <th scope='col'>Placa</th>
                     <th scope='col'>Modelo</th>
                     <th scope='col'>Cor</th>
                     <th scope='col'>Status</th>
                     <th scope='col'>Quilômetros Rodados</th>
-                    <th scope='col'>Placa</th>
                     <th scope='col'>Ano</th>
                     <th scope='col'>Ações</th>
                   </tr>
@@ -105,11 +105,11 @@ function ListagemCarros() {
                 <tbody>
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
+                      <td>{dado.placa}</td>
                       <td>{dado.modelo}</td>
                       <td>{dado.cor}</td>
                       <td>{dado.status}</td>
                       <td>{dado.kmRodados}</td>
-                      <td>{dado.placa}</td>
                       <td>{dado.ano}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>

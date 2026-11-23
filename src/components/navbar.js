@@ -1,19 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-function Navbar(props) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
       <div className="container-fluid">
@@ -26,7 +15,7 @@ function Navbar(props) {
             <li className="nav-item">
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Carros</a>
+              <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Carros</a>
               <div className="dropdown-menu rounded">
                 <a className="dropdown-item" href="/listagem-carros">Carros</a>
                 <a className="dropdown-item" href="/listagem-modelos">Modelos</a>
@@ -36,9 +25,9 @@ function Navbar(props) {
               </div>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clientes</a>
+              <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes</a>
               <div className="dropdown-menu rounded">
-                <a className="dropdown-item" href="/listagem-usuarios">Usuários</a>
+                <a className="dropdown-item" href="/listagem-clientes">Clientes</a>
                 <a className="dropdown-item" href="/listagem-locacoes">Locações</a>
               </div>
             </li>

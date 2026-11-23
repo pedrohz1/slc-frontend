@@ -15,8 +15,11 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
 import { BASE_URL } from '../config/axios';
+import SearchBar from '../components/search-bar';
+import CardLocacao from '../components/card-locacao';
 
 const baseURL = `${BASE_URL}/locacoes`;
+const carsURL = `${BASE_URL}/carros`;
 
 function ListagemLocacoes() {
   const navigate = useNavigate();
@@ -29,7 +32,22 @@ function ListagemLocacoes() {
     navigate(`/cadastro-locacoes/${id}`);
   };
 
-  const [dados, setDados] = React.useState(null);
+  const [dados, setDados] = React.useState([]);
+  const [pesquisa, setPesquisa] = React.useState('');
+
+  const [carros, setCarros] = React.useState([]);
+
+  const filtrarDados = () => {
+    const consulta = String(pesquisa).trim().toLowerCase();
+
+    if (!consulta) return dados;
+
+    return dados.filter((e) =>
+      Object.values(e).some((texto) =>
+        String(texto ?? '').toLowerCase().includes(consulta)
+      )
+    )
+  }
 
   async function excluir(id) {
     let data = JSON.stringify({ id });
@@ -53,77 +71,48 @@ function ListagemLocacoes() {
   }
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setDados(response.data);
-    });
+    async function carregarDados() {
+      try {
+        const resLocacoes = await axios.get(baseURL);
+        const resCarros = await axios.get(carsURL);
+
+        const listaLocacoes = resLocacoes.data || [];
+        const listaCarros = resCarros.data || [];
+
+        setCarros(listaCarros);
+
+        const dadosCorrigidos = listaLocacoes.map((locacao) => ({
+          ...locacao,
+          carro: listaCarros.find((c) => c.id === locacao.carro),
+        }));
+
+        setDados(dadosCorrigidos);
+      } catch (error) {
+        mensagemErro('Erro ao carregar dados');
+      }
+    }
+
+    carregarDados();
   }, []);
 
-  if(!dados) return null;
+
+  if (!dados) return null;
+  if (!carros) return null;
 
   return (
     <div className='container'>
-      <Card title='Listagem de Locações'>
-        <div className='row'>
-          <div className='col-lg-12'>
-            <div className='bs-component'>
-              <button
-                type='button'
-                className='btn btn-warning'
-                onClick={() => cadastrar()}
-              >
-                Nova Locação
-              </button>
-              <table className='table table-hover'>
-                <thead>
-                  <tr>
-                    <th scope='col'>Carro</th>
-                    <th scope='col'>Usuário</th>
-                    <th scope='col'>Data de retirada</th>
-                    <th scope='col'>Data de devolução</th>
-                    <th scope='col'>Local de retirada</th>
-                    <th scope='col'>Local de devolução</th>
-                    <th scope='col'>Status</th>
-                    <th scope='col'>Valor da diária</th>
-                    <th scope='col'>Avaliação</th>
-                    <th scope='col'>Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dados.map((dado) => (
-                    <tr key={dado.id}>
-                      <td>{dado.carro}</td>
-                      <td>{dado.usuario}</td>
-                      <td>{dado.dataRetirada}</td>
-                      <td>{dado.dataDevolucao}</td>
-                      <td>{dado.localRetirada}</td>
-                      <td>{dado.localDevolucao}</td>
-                      <td>{dado.status}</td>
-                      <td>{dado.valorDiaria}</td>
-                      <td>{(dado.status === 'concluída') ? dado.avaliacao + "/10" : "-"}</td>
-                      <td>
-                        <Stack spacing={1} padding={0} direction='row'>
-                          <IconButton
-                            aria-label='edit'
-                            onClick={() => editar(dado.id)}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            aria-label='delete'
-                            onClick={() => excluir(dado.id)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Stack>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>{' '}
-            </div>
-          </div>
-        </div>
-      </Card>
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        alignItems='center'
+        spacing={80}
+        sx={{ mb: 2 }}
+      >
+        <SearchBar label={"Pesquisar características"} onSearch={setPesquisa} />
+      </Stack>
+      {filtrarDados().map((dado) => (
+        <CardLocacao car={dado.carro.modelo} client={dado.usuario} image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdTCBZ8Vj6fLHLkS3jZ1LwRqKAHX6UcgO4Yms2aKSjA&s=10"} date={dado.dataRetirada} status={"Em andamento"}></CardLocacao>
+      ))}
     </div>
   );
 }
