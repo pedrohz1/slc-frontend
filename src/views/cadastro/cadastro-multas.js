@@ -117,7 +117,7 @@ function CadastroMultas() {
                     <select
                       id='selectTipoMulta'
                       value={tipoMulta}
-                      className='form-select'
+                      className='form-select m-2 rounded-pill'
                       name='tipoMulta'
                       onChange={(e) => setTipoMulta(e.target.value)}
                     >
@@ -138,7 +138,7 @@ function CadastroMultas() {
                       min='0'
                       id='inputValor'
                       value={valor}
-                      className='form-control'
+                      className='form-control rounded-pill m-2'
                       name='valor'
                       onChange={(e) => setValor(e.target.value)}
                     />
@@ -150,7 +150,7 @@ function CadastroMultas() {
                   id='inputDescricao'
                   rows={3}
                   value={descricao}
-                  className='form-control'
+                  className='form-control rounded-3 m-2'
                   name='descricao'
                   onChange={(e) => setDescricao(e.target.value)}
                 />
@@ -161,7 +161,7 @@ function CadastroMultas() {
                     <select
                       id='selectLocacao'
                       value={locacao}
-                      className='form-select'
+                      className='form-select m-2 rounded-pill'
                       name='locacao'
                       onChange={(e) => selecionarLocacao(e.target.value)}
                     >
@@ -179,7 +179,7 @@ function CadastroMultas() {
                     <select
                       id='selectCliente'
                       value={cliente}
-                      className='form-select'
+                      className='form-select m-2 rounded-pill'
                       name='cliente'
                       onChange={(e) => setCliente(e.target.value)}
                     >
@@ -193,20 +193,20 @@ function CadastroMultas() {
                   </FormGroup>
                 </div>
               </div>
-              <Stack spacing={1} padding={1} direction='row'>
-                <button
-                  onClick={salvar}
-                  type='button'
-                  className='btn btn-success'
-                >
-                  Salvar
-                </button>
+              <Stack spacing={1} padding={1} direction='row-reverse'>
                 <button
                   onClick={inicializar}
                   type='button'
-                  className='btn btn-danger'
+                  className='btn btn-danger rounded-pill m-2'
                 >
                   Cancelar
+                </button>
+                <button
+                  onClick={salvar}
+                  type='button'
+                  className='btn btn-success rounded-pill m-2'
+                >
+                  Salvar
                 </button>
               </Stack>
             </div>

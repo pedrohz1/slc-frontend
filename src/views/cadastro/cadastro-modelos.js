@@ -80,7 +80,7 @@ function CadastroModelos() {
 
   return (
     <div className='container'>
-      <Card title='Cadastro de Modelo'>
+      <Card title='Cadastrar Modelo'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -89,7 +89,7 @@ function CadastroModelos() {
                   type='text'
                   id='inputNome'
                   value={nome}
-                  className='form-control'
+                  className='form-control m-2 rounded-pill'
                   name='nome'
                   onChange={(e) => setNome(e.target.value)}
                 />
@@ -99,7 +99,7 @@ function CadastroModelos() {
                   type='text'
                   id='inputMarca'
                   value={marca}
-                  className='form-control'
+                  className='form-control m-2 rounded-pill'
                   name='marca'
                   onChange={(e) => setMarca(e.target.value)}
                 />
@@ -109,25 +109,25 @@ function CadastroModelos() {
                   type='text'
                   id='inputCategoria'
                   value={categoria}
-                  className='form-control'
+                  className='form-control m-2 rounded-pill'
                   name='categoria'
                   onChange={(e) => setCategoria(e.target.value)}
                 />
               </FormGroup>
-              <Stack spacing={1} padding={1} direction='row'>
-                <button
-                  onClick={salvar}
-                  type='button'
-                  className='btn btn-success'
-                >
-                  Salvar
-                </button>
+              <Stack spacing={1} padding={1} direction='row-reverse'>
                 <button
                   onClick={inicializar}
                   type='button'
-                  className='btn btn-danger'
+                  className='btn btn-danger rounded-pill m-2'
                 >
                   Cancelar
+                </button>
+                <button
+                  onClick={salvar}
+                  type='button'
+                  className='btn btn-success rounded-pill m-2'
+                >
+                  Salvar
                 </button>
               </Stack>
             </div>

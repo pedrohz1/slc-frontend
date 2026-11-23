@@ -83,25 +83,25 @@ function CadastroCategorias() {
                   type='text'
                   id='inputNome'
                   value={nome}
-                  className='form-control'
+                  className='form-control m-2 rounded-pill'
                   name='nome'
                   onChange={(e) => setNome(e.target.value)}
                 />
               </FormGroup>
-              <Stack spacing={1} padding={1} direction='row'>
-                <button
-                  onClick={salvar}
-                  type='button'
-                  className='btn btn-success'
-                >
-                  Salvar
-                </button>
+              <Stack spacing={1} padding={1} direction='row-reverse'>
                 <button
                   onClick={inicializar}
                   type='button'
-                  className='btn btn-danger'
+                  className='btn btn-danger rounded-pill m-2'
                 >
                   Cancelar
+                </button>
+                <button
+                  onClick={salvar}
+                  type='button'
+                  className='btn btn-success rounded-pill m-2'
+                >
+                  Salvar
                 </button>
               </Stack>
             </div>
