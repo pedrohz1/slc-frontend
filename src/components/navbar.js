@@ -48,6 +48,13 @@ function Navbar() {
                 <a className="dropdown-item" href="/listagem-multas">Multas</a>
               </div>
             </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sistema</a>
+              <div className="dropdown-menu rounded">
+                <a className="dropdown-item" href="/listagem-locais">Locais</a>
+                <a className="dropdown-item" href="/dashboard">Dashboard</a>
+              </div>
+            </li>
           </ul>
           <form className="d-flex" onSubmit={searchSubmit}>
             <div className="position-relative me-sm-2">
