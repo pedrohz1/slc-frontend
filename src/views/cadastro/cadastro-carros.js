@@ -8,14 +8,14 @@ import CardMedia from '@mui/material/CardMedia';
 
 import Stack from '@mui/material/Stack';
 
-import FormGroup from '../components/form-group';
+import FormGroup from '../../components/form-group';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
 function CadastroCarros() {
     const { idParam } = useParams();
