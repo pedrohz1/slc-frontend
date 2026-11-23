@@ -16,6 +16,7 @@ import ListagemClientes from '../../views/listagem/listagem-clientes';
 import ListagemMultas from '../../views/listagem/listagem-multas';
 import Login from '../../views/login';
 import Homepage from '../../views/homepage';
+import Layout from '../../components/layout';
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
@@ -23,25 +24,28 @@ function Rotas(){
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Homepage />} />
-
-                <Route path='/cadastro-marcas/:idParam?' element={<CadastroMarcas />} />
-                <Route path='/cadastro-modelos/:idParam?' element={<CadastroModelos />} />
-                <Route path='/cadastro-categorias/:idParam?' element={<CadastroCategorias />} />
-                <Route path='/cadastro-caracteristicas/:idParam?' element={<CadastroCaracteristicas />} />
-                <Route path='/cadastro-carros/:idParam?' element={<CadastroCarros />} />
-                <Route path='/cadastro-clientes/:idParam?' element={<CadastroClientes />} />
-                <Route path='/cadastro-locacoes/:idParam?' element={<CadastroLocacoes />} />
-                <Route path='/cadastro-multas/:idParam?' element={<CadastroMultas />} />
-                <Route path='/listagem-marcas' element={<ListagemMarcas />} />
-                <Route path='/listagem-modelos' element={<ListagemModelos />} />
-                <Route path='/listagem-categorias' element={<ListagemCategorias />} />
-                <Route path='/listagem-carros' element={<ListagemCarros />} />
-                <Route path='/listagem-caracteristicas' element={<ListagemCaracteristicas />} />
-                <Route path='/listagem-locacoes' element={<ListagemLocacoes />} />
-                <Route path='/listagem-clientes' element={<ListagemClientes />} />
-                <Route path='/listagem-multas' element={<ListagemMultas />} />
                 <Route path='/login' element={<Login />} />
+
+                <Route element={<Layout />}>
+                    <Route path="/" element={<Homepage />} />
+
+                    <Route path='/cadastro-marcas/:idParam?' element={<CadastroMarcas />} />
+                    <Route path='/cadastro-modelos/:idParam?' element={<CadastroModelos />} />
+                    <Route path='/cadastro-categorias/:idParam?' element={<CadastroCategorias />} />
+                    <Route path='/cadastro-caracteristicas/:idParam?' element={<CadastroCaracteristicas />} />
+                    <Route path='/cadastro-carros/:idParam?' element={<CadastroCarros />} />
+                    <Route path='/cadastro-clientes/:idParam?' element={<CadastroClientes />} />
+                    <Route path='/cadastro-locacoes/:idParam?' element={<CadastroLocacoes />} />
+                    <Route path='/cadastro-multas/:idParam?' element={<CadastroMultas />} />
+                    <Route path='/listagem-marcas' element={<ListagemMarcas />} />
+                    <Route path='/listagem-modelos' element={<ListagemModelos />} />
+                    <Route path='/listagem-categorias' element={<ListagemCategorias />} />
+                    <Route path='/listagem-carros' element={<ListagemCarros />} />
+                    <Route path='/listagem-caracteristicas' element={<ListagemCaracteristicas />} />
+                    <Route path='/listagem-locacoes' element={<ListagemLocacoes />} />
+                    <Route path='/listagem-clientes' element={<ListagemClientes />} />
+                    <Route path='/listagem-multas' element={<ListagemMultas />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )
