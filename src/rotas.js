@@ -10,6 +10,7 @@ import ListagemCaracteristicas from './views/listagem-caracteristicas';
 import ListagemLocacoes from './views/listagem-locacoes';
 import ListagemUsuarios from './views/listagem-usuarios';
 import ListagemCnh from './views/listagem-cnh';
+import Login from './views/login';
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ function Rotas(props){
                 <Route path='/listagem-locacoes' element={<ListagemLocacoes />} />
                 <Route path='/listagem-usuarios' element={<ListagemUsuarios />} />
                 <Route path='/listagem-cnh' element={<ListagemCnh />} />
+                <Route path='/login' element={<Login />} />
             </Routes>
         </BrowserRouter>
     )
