@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+
 import Stack from '@mui/material/Stack';
 
-import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
 import { mensagemSucesso, mensagemErro } from '../components/toastr';
@@ -107,9 +111,14 @@ function CadastroCarros() {
 
     return (
         <div className='container'>
-            <Card title='Cadastro de Carros'>
-                <div className='row'>
-                    <div className='col-lg-12'>
+            <h1>Cadastrar Carro</h1>
+            <Card sx={{ display: 'flex', bgcolor: '#f2f2f7', borderRadius: '10px', margin: '10px' }}>
+                <CardMedia
+                    component="img"
+                    image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTED2szINWNChABYAH7j6QFIIl6m5rY4cFS-KqAYlL3JA&s=10'}
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
                         <div className='bs-component'>
                             <FormGroup label='Placa: *' htmlFor='inputPlaca'>
                                 <input
@@ -165,7 +174,7 @@ function CadastroCarros() {
                                 <select
                                     id='inputStatus'
                                     value={status}
-                                    className='form-control'
+                                    className='form-select'
                                     name='status'
                                     onChange={(e) => setStatus(e.target.value)}
                                 >
@@ -201,8 +210,8 @@ function CadastroCarros() {
                                 </button>
                             </Stack>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Box>
             </Card>
         </div>
     );
