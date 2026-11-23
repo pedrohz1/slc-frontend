@@ -88,7 +88,7 @@ function ListagemClientes() {
                 spacing={80}
                 sx={{ mb: 2 }}
               >
-                <SearchBar label={"Pesquisar características"} onSearch={setPesquisa} />
+                <SearchBar label={"Pesquisar clientes"} onSearch={setPesquisa} />
               </Stack>
               <table className='table table-hover'>
                 <thead>

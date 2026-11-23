@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Card from '../components/card';
-
 import { mensagemSucesso, mensagemErro } from '../components/toastr';
 
 import '../custom.css';
@@ -9,9 +7,6 @@ import '../custom.css';
 import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
-import { IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
 import { BASE_URL } from '../config/axios';
@@ -108,10 +103,10 @@ function ListagemLocacoes() {
         spacing={80}
         sx={{ mb: 2 }}
       >
-        <SearchBar label={"Pesquisar características"} onSearch={setPesquisa} />
+        <SearchBar label={"Pesquisar locações"} onSearch={setPesquisa} />
       </Stack>
       {filtrarDados().map((dado) => (
-        <CardLocacao car={dado.carro.modelo} client={dado.usuario} image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdTCBZ8Vj6fLHLkS3jZ1LwRqKAHX6UcgO4Yms2aKSjA&s=10"} date={dado.dataRetirada} status={"Em andamento"}></CardLocacao>
+        <CardLocacao car={dado.carro} client={dado.usuario} image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdTCBZ8Vj6fLHLkS3jZ1LwRqKAHX6UcgO4Yms2aKSjA&s=10"} date={{retirada: dado.dataRetirada, devolucao: dado.dataDevolucao}} status={"Em andamento"}></CardLocacao>
       ))}
     </div>
   );

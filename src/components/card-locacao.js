@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 export default function CardLocacao({ car, client, image, status, date }) {
     return (
-        <Card sx={{ display: 'flex', bgcolor: '#f2f2f7' }}>
+        <Card sx={{ display: 'flex', bgcolor: '#f2f2f7', borderRadius: '10px', margin: '10px' }}>
             <CardMedia
                 component="img"
                 sx={{ width: 151 }}
@@ -16,7 +16,7 @@ export default function CardLocacao({ car, client, image, status, date }) {
                 <CardContent sx={{ flex: '1 0 auto' }}>
 
                     <Typography component="div" variant="h5">
-                        {car}
+                        {car.modelo + " - " + car.ano}
                     </Typography>
                     <Typography
                         variant="subtitle1"
@@ -32,36 +32,20 @@ export default function CardLocacao({ car, client, image, status, date }) {
                     >
                         Status: {status}
                     </Typography>
-                    <Box sx={{
-                        display: 'flex',
-                        padding: '3px',
-                        margin: '3px',
-                        borderRadius: 1,
-                        bgcolor: '#282c34',
-                    }}>
-                        <Typography
-                            variant="subtitle1"
-                            component="div"
-                            sx={{ color: 'white'}}
-                        >
-                            Retirado em: {date}
-                        </Typography>
-                    </Box>
-                    <Box sx={{
-                        display: 'flex',
-                        padding: '3px',
-                        margin: '3px',
-                        borderRadius: 1,
-                        bgcolor: '#282c34',
-                    }}>
-                        <Typography
-                            variant="subtitle1"
-                            component="div"
-                            sx={{ color: 'white'}}
-                        >
-                            Devolvido em: {date}
-                        </Typography>
-                    </Box>
+                    <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: 'text.secondary' }}
+                    >
+                        Retirado em: {date.retirada}
+                    </Typography>
+                     <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: 'text.secondary' }}
+                    >
+                        Devolvido em: {date.devolucao}
+                    </Typography>
                 </CardContent>
             </Box>
         </Card>

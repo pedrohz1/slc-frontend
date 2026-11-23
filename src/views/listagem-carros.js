@@ -88,7 +88,7 @@ function ListagemCarros() {
                 spacing={80}
                 sx={{ mb: 2 }}
               >
-                <SearchBar label={"Pesquisar características"} onSearch={setPesquisa} />
+                <SearchBar label={"Pesquisar carros"} onSearch={setPesquisa} />
               </Stack>
               <table className='table table-hover'>
                 <thead>
