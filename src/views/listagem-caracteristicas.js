@@ -35,16 +35,16 @@ function ListagemCaracteristicas() {
   const [pesquisa, setPesquisa] = React.useState('');
 
   const filtrarDados = () => {
-        const consulta = String(pesquisa).trim().toLowerCase();
+    const consulta = String(pesquisa).trim().toLowerCase();
 
-        if(!consulta) return dados;
+    if (!consulta) return dados;
 
-        return dados.filter((e) =>
-            Object.values(e).some((texto) =>
-                String(texto ?? '').toLowerCase().includes(consulta)
-            )
-        )
-    }
+    return dados.filter((e) =>
+      Object.values(e).some((texto) =>
+        String(texto ?? '').toLowerCase().includes(consulta)
+      )
+    )
+  }
 
   async function excluir(id) {
     let data = JSON.stringify({ id });
@@ -88,7 +88,7 @@ function ListagemCaracteristicas() {
                 spacing={80}
                 sx={{ mb: 2 }}
               >
-                <SearchBar label={"Pesquisar características"} onSearch={setPesquisa}  />
+                <SearchBar label={"Pesquisar características"} onSearch={setPesquisa} />
               </Stack>
               <table className='table table-hover'>
                 <thead>
@@ -131,7 +131,7 @@ function ListagemCaracteristicas() {
         style={{ width: '75px', height: '75px', aspectRatio: '1 / 1', }}
         onClick={() => cadastrar()}
       >
-        <AddIcon style={{ fontSize: '36px' }}/>
+        <AddIcon style={{ fontSize: '36px' }} />
       </button>
     </div>
   );
