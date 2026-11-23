@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
-
 import AddIcon from '@mui/icons-material/Add';
 
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
@@ -11,6 +10,8 @@ import CardLocacao from '../../components/card-locacao';
 
 import { getLocacoes, deleteLocacao } from '../../shared/api/locacoes.api';
 import { getCarros } from '../../shared/api/carros.api';
+import { getClientes } from '../../shared/api/clientes.api';
+import { getModelos } from '../../shared/api/modelos.api';
 
 import '../../custom.css';
 
@@ -49,11 +50,7 @@ function ListagemLocacoes() {
     await deleteLocacao(id)
       .then(function () {
         mensagemSucesso(`Locação excluída com sucesso!`);
-        setDados(
-          dados.filter((dado) => {
-            return dado.id !== id;
-          })
-        );
+        setDados(dados.filter((dado) => dado.id !== id));
       })
       .catch(function (error) {
         mensagemErro(`Erro ao excluir a locação`);
@@ -63,13 +60,34 @@ function ListagemLocacoes() {
   React.useEffect(() => {
     async function carregarDados() {
       try {
-        const listaLocacoes = (await getLocacoes()) || [];
-        const listaCarros = (await getCarros()) || [];
+        const [listaLocacoes, listaCarros, listaClientes, listaModelos] = await Promise.all([
+          getLocacoes(),
+          getCarros(),
+          getClientes(),
+          getModelos(),
+        ]);
 
-        const dadosCorrigidos = listaLocacoes.map((locacao) => ({
-          ...locacao,
-          carro: listaCarros.find((c) => c.id === locacao.carro) || locacao.carro,
-        }));
+        const dadosCorrigidos = (listaLocacoes || []).map((locacao) => {
+          const carroId = typeof locacao.carro === 'object' ? locacao.carro?.id : locacao.carro;
+          const carroEncontrado = (listaCarros || []).find((c) => c.id === carroId) || locacao.carro;
+
+          const modeloId = typeof carroEncontrado?.modelo === 'object' ? carroEncontrado.modelo?.id : carroEncontrado?.modelo;
+          const modeloEncontrado = (listaModelos || []).find((m) => m.id === modeloId);
+
+          const usuarioId = typeof locacao.usuario === 'object' ? locacao.usuario?.id : locacao.usuario;
+          const clienteEncontrado = (listaClientes || []).find((u) => u.id === usuarioId) || locacao.usuario;
+
+          return {
+            ...locacao,
+            carro: carroEncontrado
+              ? {
+                  ...carroEncontrado,
+                  modelo: modeloEncontrado?.nome || carroEncontrado.modelo,
+                }
+              : locacao.carro,
+            usuario: clienteEncontrado,
+          };
+        });
 
         setDados(dadosCorrigidos);
       } catch (error) {
@@ -95,9 +113,9 @@ function ListagemLocacoes() {
         <CardLocacao
           key={dado.id}
           car={dado.carro}
-          client={dado.usuario}
+          client={dado.usuario.nome}
           image={
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTED2szINWNChABYAH7j6QFIIl6m5rY4cFS-KqAYlL3JA&s=10'
+            dado.carro?.url
           }
           date={{ retirada: dado.dataRetirada, devolucao: dado.dataDevolucao }}
           status={dado.status}
@@ -108,7 +126,7 @@ function ListagemLocacoes() {
       <button
         type='button'
         className="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow p-0 d-flex align-items-center justify-content-center"
-        style={{ width: '75px', height: '75px', aspectRatio: '1 / 1', }}
+        style={{ width: '75px', height: '75px', aspectRatio: '1 / 1' }}
         onClick={() => cadastrar()}
       >
         <AddIcon style={{ fontSize: '36px' }} />
