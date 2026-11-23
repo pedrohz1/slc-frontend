@@ -41,6 +41,7 @@ function Rotas(){
                         <Route path='/cadastro-clientes/:idParam?' element={<CadastroClientes />} />
                         <Route path='/cadastro-locacoes/:idParam?' element={<CadastroLocacoes />} />
                         <Route path='/cadastro-multas/:idParam?' element={<CadastroMultas />} />
+                        <Route path='/cadastro-locais/:idParam?' element={<CadastroLocais />} />
                         <Route path='/listagem-marcas' element={<ListagemMarcas />} />
                         <Route path='/listagem-modelos' element={<ListagemModelos />} />
                         <Route path='/listagem-categorias' element={<ListagemCategorias />} />
@@ -49,6 +50,7 @@ function Rotas(){
                         <Route path='/listagem-locacoes' element={<ListagemLocacoes />} />
                         <Route path='/listagem-clientes' element={<ListagemClientes />} />
                         <Route path='/listagem-multas' element={<ListagemMultas />} />
+                        <Route path='/listagem-locais' element={<ListagemLocais />} />
                     </Route>
                 </Route>
             </Routes>
