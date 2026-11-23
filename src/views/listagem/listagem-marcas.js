@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -15,20 +15,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
-import SearchBar from '../components/search-bar';
+import { BASE_URL } from '../../config/axios';
+import SearchBar from '../../components/search-bar';
 
-const baseURL = `${BASE_URL}/usuarios`;
+const baseURL = `${BASE_URL}/marcas`;
 
-function ListagemClientes() {
+function ListagemMarcas() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-clientes`);
+    navigate(`/cadastro-marcas`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-clientes/${id}`);
+    navigate(`/cadastro-marcas/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -50,12 +50,13 @@ function ListagemClientes() {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
     console.log(url);
+
     await axios
       .delete(url, data, {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Usuário excluído com sucesso!`);
+        mensagemSucesso(`Marca excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -63,7 +64,7 @@ function ListagemClientes() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o modelo`);
+        mensagemErro(`Erro ao excluir a marca`);
       });
   }
 
@@ -77,7 +78,7 @@ function ListagemClientes() {
 
   return (
     <div className='container'>
-      <Card title='Listagem de Clientes '>
+      <Card title='Listagem de Marcas'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -88,16 +89,12 @@ function ListagemClientes() {
                 spacing={80}
                 sx={{ mb: 2 }}
               >
-                <SearchBar label={"Pesquisar clientes"} onSearch={setPesquisa} />
+                <SearchBar label={"Pesquisar marcas"} onSearch={setPesquisa} />
               </Stack>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Nome</th>
-                    <th scope='col'>Email</th>
-                    <th scope='col'>CPF</th>
-                    <th scope='col'>telefone</th>
-                    <th scope='col'>CNH</th>
                     <th scope='col'>Ações</th>
                   </tr>
                 </thead>
@@ -105,10 +102,6 @@ function ListagemClientes() {
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
-                      <td>{dado.email}</td>
-                      <td>{dado.cpf}</td>
-                      <td>{dado.telefone}</td>
-                      <td>{dado.cnh}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -145,4 +138,4 @@ function ListagemClientes() {
   );
 }
 
-export default ListagemClientes;
+export default ListagemMarcas;
