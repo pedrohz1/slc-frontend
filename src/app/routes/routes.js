@@ -16,6 +16,9 @@ import ListagemLocacoes from '../../views/listagem/listagem-locacoes';
 import ListagemClientes from '../../views/listagem/listagem-clientes';
 import ListagemMultas from '../../views/listagem/listagem-multas';
 import ListagemLocais from '../../views/listagem/listagem-locais';
+
+import Dashboard from '../../views/dashboard';
+
 import Login from '../../views/login';
 import Homepage from '../../views/homepage';
 import Layout from '../../components/layout';
@@ -51,6 +54,7 @@ function Rotas(){
                         <Route path='/listagem-clientes' element={<ListagemClientes />} />
                         <Route path='/listagem-multas' element={<ListagemMultas />} />
                         <Route path='/listagem-locais' element={<ListagemLocais />} />
+                        <Route path='/dashboard' element={<Dashboard />} />
                     </Route>
                 </Route>
             </Routes>
