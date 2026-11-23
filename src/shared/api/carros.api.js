@@ -10,6 +10,10 @@ export async function getCarroById(id) {
   return response.data;
 }
 
+export async function createCarro(data) {
+  await api.post('/carros', data);
+}
+
 export async function updateCarro(id, data) {
   await api.put(`/carros/${id}`, data);
 }

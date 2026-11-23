@@ -5,20 +5,16 @@ import Stack from '@mui/material/Stack';
 
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
-
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../../custom.css';
+import { getModeloById, createModelo, updateModelo } from '../../shared/api/modelos.api';
 
-import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import '../../custom.css';
 
 function CadastroModelos() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
-
-  const baseURL = `${BASE_URL}/modelos`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
@@ -43,13 +39,9 @@ function CadastroModelos() {
       id,
       nome,
     };
-    data = JSON.stringify(data);
     if (idParam == null) {
-      await axios
-        .post(baseURL, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
+      await createModelo(data)
+        .then(function () {
           mensagemSucesso(`Marca ${nome} cadastrada com sucesso!`);
           navigate(`/listagem-modelos`);
         })
@@ -57,11 +49,8 @@ function CadastroModelos() {
           mensagemErro(error.response.data);
         });
     } else {
-      await axios
-        .put(`${baseURL}/${idParam}`, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
+      await updateModelo(idParam, data)
+        .then(function () {
           mensagemSucesso(`Marca ${nome} alterada com sucesso!`);
           navigate(`/listagem-modelos`);
         })
@@ -72,9 +61,11 @@ function CadastroModelos() {
   }
 
   async function buscar() {
-    await axios.get(`${baseURL}/${idParam ? idParam : ""}`).then((response) => {
-      setDados(response.data);
-    });
+    if (idParam) {
+      await getModeloById(idParam).then((dado) => {
+        setDados(dado);
+      });
+    }
     setId(dados.id);
     setNome(dados.nome)
     setMarca(dados.marca)

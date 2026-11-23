@@ -10,6 +10,10 @@ export async function getCategoriaById(id) {
   return response.data;
 }
 
+export async function createCategoria(data) {
+  await api.post('/categorias', data);
+}
+
 export async function updateCategoria(id, data) {
   await api.put(`/categorias/${id}`, data);
 }

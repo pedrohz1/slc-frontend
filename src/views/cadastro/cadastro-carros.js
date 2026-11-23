@@ -5,24 +5,19 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
 import Stack from '@mui/material/Stack';
 
 import FormGroup from '../../components/form-group';
-
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../../custom.css';
+import { getCarroById, createCarro, updateCarro } from '../../shared/api/carros.api';
 
-import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import '../../custom.css';
 
 function CadastroCarros() {
     const { idParam } = useParams();
 
     const navigate = useNavigate();
-
-    const baseURL = `${BASE_URL}/carros`;
 
     const [id, setId] = useState('');
     const [placa, setPlaca] = useState('');
@@ -61,13 +56,9 @@ function CadastroCarros() {
             ano,
             caracteristicas
         };
-        data = JSON.stringify(data);
         if (idParam == null) {
-            await axios
-                .post(baseURL, data, {
-                    headers: { 'Content-Type': 'application/json' },
-                })
-                .then(function (response) {
+            await createCarro(data)
+                .then(function () {
                     mensagemSucesso(`Carro com a placa ${placa} cadastrada com sucesso!`);
                     navigate(`/listagem-carros`);
                 })
@@ -75,11 +66,8 @@ function CadastroCarros() {
                     mensagemErro(error.response.data);
                 });
         } else {
-            await axios
-                .put(`${baseURL}/${idParam}`, data, {
-                    headers: { 'Content-Type': 'application/json' },
-                })
-                .then(function (response) {
+            await updateCarro(idParam, data)
+                .then(function () {
                     mensagemSucesso(`Carro com a placa ${placa} alterado com sucesso!`);
                     navigate(`/listagem-carros`);
                 })
@@ -90,9 +78,11 @@ function CadastroCarros() {
     }
 
     async function buscar() {
-        await axios.get(`${baseURL}/${idParam ? idParam : ""}`).then((response) => {
-            setDados(response.data);
-        });
+        if (idParam) {
+            await getCarroById(idParam).then((dado) => {
+                setDados(dado);
+            });
+        }
         setId(dados.id);
         setPlaca(dados.placa);
         setModelo(dados.modelo);

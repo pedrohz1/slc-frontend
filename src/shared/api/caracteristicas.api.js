@@ -10,6 +10,10 @@ export async function getCaracteristicaById(id) {
   return response.data;
 }
 
+export async function createCaracteristica(data) {
+  await api.post('/caracteristicas', data);
+}
+
 export async function updateCaracteristica(id, data) {
   await api.put(`/caracteristicas/${id}`, data);
 }

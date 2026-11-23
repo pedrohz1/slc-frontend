@@ -10,6 +10,10 @@ export async function getModeloById(id) {
   return response.data;
 }
 
+export async function createModelo(data) {
+  await api.post('/modelos', data);
+}
+
 export async function updateModelo(id, data) {
   await api.put(`/modelos/${id}`, data);
 }

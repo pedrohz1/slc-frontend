@@ -10,6 +10,10 @@ export async function getMarcaById(id) {
   return response.data;
 }
 
+export async function createMarca(data) {
+  await api.post('/marcas', data);
+}
+
 export async function updateMarca(id, data) {
   await api.put(`/marcas/${id}`, data);
 }

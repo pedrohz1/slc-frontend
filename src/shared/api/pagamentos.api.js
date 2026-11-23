@@ -10,6 +10,10 @@ export async function getPagamentoById(id) {
   return response.data;
 }
 
+export async function createPagamento(data) {
+  await api.post('/pagamentos', data);
+}
+
 export async function updatePagamento(id, data) {
   await api.put(`/pagamentos/${id}`, data);
 }

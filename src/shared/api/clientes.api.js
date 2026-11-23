@@ -10,6 +10,10 @@ export async function getClienteById(id) {
   return response.data;
 }
 
+export async function createCliente(data) {
+  await api.post('/clientes', data);
+}
+
 export async function updateCliente(id, data) {
   await api.put(`/clientes/${id}`, data);
 }

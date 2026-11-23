@@ -10,6 +10,10 @@ export async function getLocacaoById(id) {
   return response.data;
 }
 
+export async function createLocacao(data) {
+  await api.post('/locacoes', data);
+}
+
 export async function updateLocacao(id, data) {
   await api.put(`/locacoes/${id}`, data);
 }
