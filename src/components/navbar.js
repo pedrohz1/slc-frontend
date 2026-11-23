@@ -13,7 +13,7 @@ function Navbar() {
     e.preventDefault();
 
     if(!searchInput) {
-      return;
+      return navigate("/");
     }
 
     return navigate(`/search/${searchInput}`);
