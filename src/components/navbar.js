@@ -34,8 +34,7 @@ function Navbar() {
             </li>
           </ul>
           <form className="d-flex">
-            <input className="form-control me-sm-2 rounded" type="search" placeholder="Search"/ >
-              <button className="btn btn-secondary my-2 my-sm-0 rounded" type="submit">Search</button>
+            <input className="form-control me-sm-2 rounded" style={{ width: "600px" }} type="search" placeholder="Pesquise carros, clientes..."/ >
           </form>
         </div>
       </div>
