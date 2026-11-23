@@ -106,7 +106,7 @@ function CadastroLocacoes() {
                 <select
                   id='selectCarro'
                   value={carro}
-                  className='form-select'
+                  className='form-select m-1 rounded-pill'
                   name='carro'
                   onChange={(e) => setCarro(e.target.value)}
                 >
@@ -122,7 +122,7 @@ function CadastroLocacoes() {
                 <select
                   id='selectUsuario'
                   value={usuario}
-                  className='form-select'
+                  className='form-select m-1 rounded-pill'
                   name='usuario'
                   onChange={(e) => setUsuario(e.target.value)}
                 >
@@ -141,7 +141,7 @@ function CadastroLocacoes() {
                       type='date'
                       id='inputDataRetirada'
                       value={dataRetirada}
-                      className='form-control'
+                      className='form-control rounded-pill m-1'
                       name='dataRetirada'
                       onChange={(e) => setDataRetirada(e.target.value)}
                     />
@@ -153,7 +153,7 @@ function CadastroLocacoes() {
                       type='date'
                       id='inputDataDevolucao'
                       value={dataDevolucao}
-                      className='form-control'
+                      className='form-control rounded-pill m-1'
                       name='dataDevolucao'
                       onChange={(e) => setDataDevolucao(e.target.value)}
                     />
@@ -167,7 +167,7 @@ function CadastroLocacoes() {
                       type='text'
                       id='inputLocalRetirada'
                       value={localRetirada}
-                      className='form-control'
+                      className='form-control rounded-pill m-1'
                       name='localRetirada'
                       onChange={(e) => setLocalRetirada(e.target.value)}
                     />
@@ -179,7 +179,7 @@ function CadastroLocacoes() {
                       type='text'
                       id='inputLocalDevolucao'
                       value={localDevolucao}
-                      className='form-control'
+                      className='form-control rounded-pill m-1'
                       name='localDevolucao'
                       onChange={(e) => setLocalDevolucao(e.target.value)}
                     />
@@ -193,7 +193,7 @@ function CadastroLocacoes() {
                       type='number'
                       id='inputValorDiaria'
                       value={valorDiaria}
-                      className='form-control'
+                      className='form-control rounded-pill m-1'
                       name='valorDiaria'
                       onChange={(e) => setValorDiaria(e.target.value)}
                     />
@@ -204,7 +204,7 @@ function CadastroLocacoes() {
                     <select
                       id='selectStatus'
                       value={status}
-                      className='form-select'
+                      className='form-select m-1 rounded-pill'
                       name='status'
                       onChange={(e) => setStatus(e.target.value)}
                     >
@@ -214,20 +214,20 @@ function CadastroLocacoes() {
                   </FormGroup>
                 </div>
               </div>
-              <Stack spacing={1} padding={1} direction='row'>
-                <button
-                  onClick={salvar}
-                  type='button'
-                  className='btn btn-success'
-                >
-                  Salvar
-                </button>
+              <Stack spacing={1} padding={1} direction='row-reverse'>
                 <button
                   onClick={inicializar}
                   type='button'
-                  className='btn btn-danger'
+                  className='btn btn-danger rounded-pill m-2'
                 >
                   Cancelar
+                </button>
+                <button
+                  onClick={salvar}
+                  type='button'
+                  className='btn btn-success rounded-pill m-2'
+                >
+                  Salvar
                 </button>
               </Stack>
             </div>
