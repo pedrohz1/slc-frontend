@@ -9,3 +9,11 @@ export async function getCarroById(id) {
   const response = await api.get(`/carros/${id}`);
   return response.data;
 }
+
+export async function updateCarro(id, data) {
+  await api.put(`/carros/${id}`, data);
+}
+
+export async function deleteCarro(id) {
+  await api.delete(`/carros/${id}`);
+}

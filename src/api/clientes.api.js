@@ -9,3 +9,11 @@ export async function getClienteById(id) {
   const response = await api.get(`/clientes/${id}`);
   return response.data;
 }
+
+export async function updateCliente(id, data) {
+  await api.put(`/clientes/${id}`, data);
+}
+
+export async function deleteCliente(id) {
+  await api.delete(`/clientes/${id}`);
+}
