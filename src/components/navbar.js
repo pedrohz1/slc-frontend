@@ -31,6 +31,7 @@ function Navbar(props) {
                 <a className="dropdown-item" href="/listagem-carros">Carros</a>
                 <a className="dropdown-item" href="/listagem-modelos">Modelos</a>
                 <a className="dropdown-item" href="/listagem-marcas">Marcas</a>
+                <a className="dropdown-item" href="/listagem-categorias">Categorias</a>
                 <a className="dropdown-item" href="/listagem-caracteristicas">Características</a>
               </div>
             </li>
