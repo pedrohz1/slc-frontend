@@ -10,6 +10,10 @@ export async function getSeguroById(id) {
   return response.data;
 }
 
+export async function createSeguro(data) {
+  await api.post('/seguros', data);
+}
+
 export async function updateSeguro(id, data) {
   await api.put(`/seguros/${id}`, data);
 }

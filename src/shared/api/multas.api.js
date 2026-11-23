@@ -10,6 +10,10 @@ export async function getMultaById(id) {
   return response.data;
 }
 
+export async function createMulta(data) {
+  await api.post('/multas', data);
+}
+
 export async function updateMulta(id, data) {
   await api.put(`/multas/${id}`, data);
 }

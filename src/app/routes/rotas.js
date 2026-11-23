@@ -4,6 +4,7 @@ import CadastroCategorias from '../../views/cadastro/cadastro-categorias';
 import CadastroCaracteristicas from '../../views/cadastro/cadastro-caracteristicas';
 import CadastroCarros from '../../views/cadastro/cadastro-carros';
 import CadastroClientes from '../../views/cadastro/cadastro-clientes';
+import CadastroLocacoes from '../../views/cadastro/cadastro-locacoes';
 import ListagemMarcas from '../../views/listagem/listagem-marcas';
 import ListagemModelos from '../../views/listagem/listagem-modelos';
 import ListagemCategorias from '../../views/listagem/listagem-categorias';
@@ -26,6 +27,7 @@ function Rotas(props){
                 <Route path='/cadastro-caracteristicas/:idParam?' element={<CadastroCaracteristicas />} />
                 <Route path='/cadastro-carros/:idParam?' element={<CadastroCarros />} />
                 <Route path='/cadastro-clientes/:idParam?' element={<CadastroClientes />} />
+                <Route path='/cadastro-locacoes/:idParam?' element={<CadastroLocacoes />} />
                 <Route path='/listagem-marcas' element={<ListagemMarcas />} />
                 <Route path='/listagem-modelos' element={<ListagemModelos />} />
                 <Route path='/listagem-categorias' element={<ListagemCategorias />} />
