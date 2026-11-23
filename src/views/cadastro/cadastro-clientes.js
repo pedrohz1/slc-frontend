@@ -100,7 +100,7 @@ function CadastroClientes() {
     return (
         <div className='container'>
             <Card title='Cadastrar Clientes'>
-                <div className='row bg-primary p-2 rounded-4'>
+                <div className='row p-2 rounded-4'>
                     <div className='col-lg-12'>
                         <div className='bs-component'>
                             <FormGroup label='Nome: *' htmlFor='inputNome'>

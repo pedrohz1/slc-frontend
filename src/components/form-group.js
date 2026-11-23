@@ -3,7 +3,7 @@ import React from 'react';
 function FormGroup(props) {
   return (
     <div className='form-group'>
-      <label className='text-white m-1' htmlFor={props.htmlFor}>{props.label}</label>
+      <label className='m-1' htmlFor={props.htmlFor}>{props.label}</label>
       {props.children}
     </div>
   );
