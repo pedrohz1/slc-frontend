@@ -7,12 +7,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Stack from '@mui/material/Stack';
 
-import FormGroup from '../../components/form-group';
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
 import { getCarroById, createCarro, updateCarro } from '../../shared/api/carros.api';
 
 import '../../custom.css';
+import CarFormGroup from '../../components/car-form-group';
 
 function CadastroCarros() {
     const { idParam } = useParams();
@@ -106,7 +106,7 @@ function CadastroCarros() {
     return (
         <div className='container'>
             <h1>Cadastrar Carro</h1>
-            <Card className='d-flex align-items-center' sx={{ display: 'flex', bgcolor: '#f2f2f7', borderRadius: '10px', margin: '10px' }}>
+            <Card className='d-flex align-items-center shadow' sx={{ display: 'flex', bgcolor: '#f2f2f7', margin: '10px' }}>
                 <CardMedia
                     component="img"
                     image={`${url}`}
@@ -115,7 +115,7 @@ function CadastroCarros() {
                 <Box className='w-100 bg-primary' sx={{ display: 'flex', flexDirection: 'column'}}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <div className='bs-component'>
-                            <FormGroup label='Placa: *' htmlFor='inputPlaca'>
+                            <CarFormGroup label='Placa: *' htmlFor='inputPlaca'>
                                 <input
                                     type='text'
                                     id='inputPlaca'
@@ -124,8 +124,8 @@ function CadastroCarros() {
                                     name='placa'
                                     onChange={(e) => setPlaca(e.target.value)}
                                 />
-                            </FormGroup>
-                            <FormGroup label='Modelo: *' htmlFor='inputModelo'>
+                            </CarFormGroup>
+                            <CarFormGroup label='Modelo: *' htmlFor='inputModelo'>
                                 <input
                                     type='text'
                                     id='inputModelo'
@@ -134,8 +134,8 @@ function CadastroCarros() {
                                     name='modelo'
                                     onChange={(e) => setModelo(e.target.value)}
                                 />
-                            </FormGroup>
-                            <FormGroup label='Ano: *' htmlFor='inputAno'>
+                            </CarFormGroup>
+                            <CarFormGroup label='Ano: *' htmlFor='inputAno'>
                                 <input
                                     type='number'
                                     id='inputAno'
@@ -144,8 +144,8 @@ function CadastroCarros() {
                                     name='ano'
                                     onChange={(e) => setAno(e.target.value)}
                                 />
-                            </FormGroup>
-                            <FormGroup label='Cor: *' htmlFor='inputCor'>
+                            </CarFormGroup>
+                            <CarFormGroup label='Cor: *' htmlFor='inputCor'>
                                 <input
                                     type='text'
                                     id='inputCor'
@@ -154,8 +154,8 @@ function CadastroCarros() {
                                     name='cor'
                                     onChange={(e) => setCor(e.target.value)}
                                 />
-                            </FormGroup>
-                            <FormGroup label='Km Rodados: *' htmlFor='inputKmRodados'>
+                            </CarFormGroup>
+                            <CarFormGroup label='Km Rodados: *' htmlFor='inputKmRodados'>
                                 <input
                                     type='number'
                                     id='inputKmRodados'
@@ -164,8 +164,8 @@ function CadastroCarros() {
                                     name='kmRodados'
                                     onChange={(e) => setKmRodados(e.target.value)}
                                 />
-                            </FormGroup>
-                            <FormGroup label='Status: *' htmlFor='inputStatus'>
+                            </CarFormGroup>
+                            <CarFormGroup label='Status: *' htmlFor='inputStatus'>
                                 <select
                                     id='inputStatus'
                                     value={status}
@@ -177,8 +177,8 @@ function CadastroCarros() {
                                     <option value='disponível'>Disponível</option>
                                     <option value='não disponível'>Não disponível</option>
                                 </select>
-                            </FormGroup>
-                            <FormGroup label='Características: *' htmlFor='inputCaracteristicas'>
+                            </CarFormGroup>
+                            <CarFormGroup label='Características: *' htmlFor='inputCaracteristicas'>
                                 <input
                                     type='text'
                                     id='inputCaracteristicas'
@@ -187,7 +187,17 @@ function CadastroCarros() {
                                     name='caracteristicas'
                                     onChange={(e) => setCaracteristicas(e.target.value)}
                                 />
-                            </FormGroup>
+                            </CarFormGroup>
+                            <CarFormGroup label='URL da foto: *' htmlFor='inputUrl'>
+                                <input
+                                    type='text'
+                                    id='inputUrl'
+                                    value={url}
+                                    className='form-control rounded-4 m-1'
+                                    name='url'
+                                    onChange={(e) => setUrl(e.target.value)}
+                                />
+                            </CarFormGroup>
                             <Stack className='mt-4' spacing={1} padding={1} direction='row'>
                                 <button
                                     onClick={salvar}
