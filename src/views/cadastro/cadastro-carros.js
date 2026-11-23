@@ -112,7 +112,7 @@ function CadastroCarros() {
                     image={`${url}`}
                     className="object-fit-contain w-50"
                 />
-                <Box className='w-100 bg-primary' sx={{ display: 'flex', flexDirection: 'column'}}>
+                <Box className='w-100 bg-secondary' sx={{ display: 'flex', flexDirection: 'column'}}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <div className='bs-component'>
                             <CarFormGroup label='Placa: *' htmlFor='inputPlaca'>
