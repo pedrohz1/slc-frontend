@@ -29,6 +29,7 @@ function Navbar() {
               <div className="dropdown-menu rounded">
                 <a className="dropdown-item" href="/listagem-clientes">Clientes</a>
                 <a className="dropdown-item" href="/listagem-locacoes">Locações</a>
+                <a className="dropdown-item" href="/listagem-multas">Multas</a>
               </div>
             </li>
           </ul>
