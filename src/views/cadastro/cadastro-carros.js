@@ -112,7 +112,7 @@ function CadastroCarros() {
                     image={`${url}`}
                     className="object-fit-contain w-50"
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column'}}>
+                <Box className='w-100 bg-primary' sx={{ display: 'flex', flexDirection: 'column'}}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <div className='bs-component'>
                             <FormGroup label='Placa: *' htmlFor='inputPlaca'>
@@ -120,7 +120,7 @@ function CadastroCarros() {
                                     type='text'
                                     id='inputPlaca'
                                     value={placa}
-                                    className='form-control'
+                                    className='form-control rounded-4 m-1'
                                     name='placa'
                                     onChange={(e) => setPlaca(e.target.value)}
                                 />
@@ -130,7 +130,7 @@ function CadastroCarros() {
                                     type='text'
                                     id='inputModelo'
                                     value={modelo}
-                                    className='form-control'
+                                    className='form-control rounded-4 m-1'
                                     name='modelo'
                                     onChange={(e) => setModelo(e.target.value)}
                                 />
@@ -140,7 +140,7 @@ function CadastroCarros() {
                                     type='number'
                                     id='inputAno'
                                     value={ano}
-                                    className='form-control'
+                                    className='form-control rounded-4 m-1'
                                     name='ano'
                                     onChange={(e) => setAno(e.target.value)}
                                 />
@@ -150,7 +150,7 @@ function CadastroCarros() {
                                     type='text'
                                     id='inputCor'
                                     value={cor}
-                                    className='form-control'
+                                    className='form-control rounded-4 m-1'
                                     name='cor'
                                     onChange={(e) => setCor(e.target.value)}
                                 />
@@ -160,7 +160,7 @@ function CadastroCarros() {
                                     type='number'
                                     id='inputKmRodados'
                                     value={kmRodados}
-                                    className='form-control'
+                                    className='form-control rounded-4 m-1'
                                     name='kmRodados'
                                     onChange={(e) => setKmRodados(e.target.value)}
                                 />
@@ -169,7 +169,7 @@ function CadastroCarros() {
                                 <select
                                     id='inputStatus'
                                     value={status}
-                                    className='form-select'
+                                    className='form-select rounded-4 m-1'
                                     name='status'
                                     onChange={(e) => setStatus(e.target.value)}
                                 >
@@ -183,23 +183,23 @@ function CadastroCarros() {
                                     type='text'
                                     id='inputCaracteristicas'
                                     value={caracteristicas}
-                                    className='form-control'
+                                    className='form-control rounded-4 m-1'
                                     name='caracteristicas'
                                     onChange={(e) => setCaracteristicas(e.target.value)}
                                 />
                             </FormGroup>
-                            <Stack spacing={1} padding={1} direction='row'>
+                            <Stack className='mt-4' spacing={1} padding={1} direction='row'>
                                 <button
                                     onClick={salvar}
                                     type='button'
-                                    className='btn btn-success'
+                                    className='btn btn-success rounded-pill'
                                 >
                                     Salvar
                                 </button>
                                 <button
                                     onClick={inicializar}
                                     type='button'
-                                    className='btn btn-danger'
+                                    className='btn btn-danger rounded-pill  '
                                 >
                                     Cancelar
                                 </button>
