@@ -27,6 +27,7 @@ function CadastroCarros() {
     const [status, setStatus] = useState('');
     const [kmRodados, setKmRodados] = useState('');
     const [caracteristicas, setCaracteristicas] = useState([]);
+    const [url, setUrl] = useState('');
 
     const [dados, setDados] = useState([]);
 
@@ -42,6 +43,7 @@ function CadastroCarros() {
             setKmRodados(dados.kmRodados);
             setStatus(dados.status);
             setCaracteristicas(dados.caracteristicas);
+            setUrl(dados.url);
         }
     }
 
@@ -54,7 +56,8 @@ function CadastroCarros() {
             kmRodados,
             placa,
             ano,
-            caracteristicas
+            caracteristicas,
+            url
         };
         if (idParam == null) {
             await createCarro(data)
@@ -91,6 +94,7 @@ function CadastroCarros() {
         setKmRodados(dados.kmRodados);
         setStatus(dados.status);
         setCaracteristicas(dados.caracteristicas);
+        setUrl(dados.url);
     }
 
     useEffect(() => {
@@ -102,12 +106,13 @@ function CadastroCarros() {
     return (
         <div className='container'>
             <h1>Cadastrar Carro</h1>
-            <Card sx={{ display: 'flex', bgcolor: '#f2f2f7', borderRadius: '10px', margin: '10px' }}>
+            <Card className='d-flex align-items-center' sx={{ display: 'flex', bgcolor: '#f2f2f7', borderRadius: '10px', margin: '10px' }}>
                 <CardMedia
                     component="img"
-                    image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTED2szINWNChABYAH7j6QFIIl6m5rY4cFS-KqAYlL3JA&s=10'}
+                    image={`${url}`}
+                    className="object-fit-contain w-50"
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column'}}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <div className='bs-component'>
                             <FormGroup label='Placa: *' htmlFor='inputPlaca'>
