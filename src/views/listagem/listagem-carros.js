@@ -14,11 +14,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import { getCarros, deleteCarro } from '../../api/carros.api';
 import SearchBar from '../../components/search-bar';
-
-const baseURL = `${BASE_URL}/carros`;
 
 function ListagemCarros() {
   const navigate = useNavigate();
@@ -47,14 +44,8 @@ function ListagemCarros() {
   }
 
   async function excluir(id) {
-    let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-    await axios
-      .delete(url, data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-      .then(function (response) {
+    await deleteCarro(id)
+      .then(function () {
         mensagemSucesso(`Carro excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
@@ -68,8 +59,8 @@ function ListagemCarros() {
   }
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setDados(response.data);
+    getCarros().then((lista) => {
+      setDados(lista);
     });
   }, []);
 

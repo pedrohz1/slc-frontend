@@ -14,11 +14,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import { getMarcas, deleteMarca } from '../../api/marcas.api';
 import SearchBar from '../../components/search-bar';
-
-const baseURL = `${BASE_URL}/marcas`;
 
 function ListagemMarcas() {
   const navigate = useNavigate();
@@ -47,15 +44,8 @@ function ListagemMarcas() {
   }
 
   async function excluir(id) {
-    let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-
-    await axios
-      .delete(url, data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-      .then(function (response) {
+    await deleteMarca(id)
+      .then(function () {
         mensagemSucesso(`Marca excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
@@ -69,8 +59,8 @@ function ListagemMarcas() {
   }
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setDados(response.data);
+    getMarcas().then((lista) => {
+      setDados(lista);
     });
   }, []);
 

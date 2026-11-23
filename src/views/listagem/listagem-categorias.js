@@ -14,11 +14,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import { getCategorias, deleteCategoria } from '../../api/categorias.api';
 import SearchBar from '../../components/search-bar';
-
-const baseURL = `${BASE_URL}/categorias`;
 
 function ListagemCategorias() {
   const navigate = useNavigate();
@@ -47,14 +44,8 @@ function ListagemCategorias() {
       }
 
   async function excluir(id) {
-    let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-    await axios
-      .delete(url, data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-      .then(function (response) {
+    await deleteCategoria(id)
+      .then(function () {
         mensagemSucesso(`Categoria excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
@@ -68,8 +59,8 @@ function ListagemCategorias() {
   }
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setDados(response.data);
+    getCategorias().then((lista) => {
+      setDados(lista);
     });
   }, []);
 

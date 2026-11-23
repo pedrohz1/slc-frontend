@@ -8,13 +8,8 @@ import SearchBar from '../../components/search-bar';
 import CardLocacao from '../../components/card-locacao';
 import AddIcon from '@mui/icons-material/Add';
 
-import { getLocacoes } from '../../api/locacoes.api';
+import { getLocacoes, deleteLocacao } from '../../api/locacoes.api';
 import { getCarros } from '../../api/carros.api';
-
-import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
-
-const baseURL = `${BASE_URL}/locacoes`;
 
 function ListagemLocacoes() {
   const navigate = useNavigate();
@@ -48,14 +43,8 @@ function ListagemLocacoes() {
   };
 
   async function excluir(id) {
-    let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-    await axios
-      .delete(url, data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-      .then(function (response) {
+    await deleteLocacao(id)
+      .then(function () {
         mensagemSucesso(`Locação excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
