@@ -76,7 +76,6 @@ function SearchResults() {
         return lista.find((item) => item.id === id)?.nome ?? id;
     }
 
-    // Cada grupo vira uma tabela: "colunas" define o cabeçalho e o valor de cada célula
     const grupos = [
         {
             titulo: "Carros",
