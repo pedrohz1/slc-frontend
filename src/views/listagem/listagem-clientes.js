@@ -1,21 +1,20 @@
 import React from 'react';
-
-import Card from '../../components/card';
-
-import { mensagemSucesso, mensagemErro } from '../../components/toastr';
-
-import '../../custom.css';
-
 import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import { IconButton } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import { getClientes, deleteCliente } from '../../api/clientes.api';
+import Card from '../../components/card';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
+
+import { getClientes, deleteCliente } from '../../shared/api/clientes.api';
+
+import '../../custom.css';
 
 function ListagemClientes() {
   const navigate = useNavigate();

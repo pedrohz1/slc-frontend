@@ -1,4 +1,4 @@
-import { api } from '../config/axios';
+import { api } from '../../config/axios';
 
 export async function getLocacoes() {
   const response = await api.get('/locacoes');

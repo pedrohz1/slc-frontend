@@ -1,21 +1,20 @@
 import React from 'react';
-
-import Card from '../../components/card';
-
-import { mensagemSucesso, mensagemErro } from '../../components/toastr';
-
-import '../../custom.css';
-
 import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import { IconButton } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import { getMarcas, deleteMarca } from '../../api/marcas.api';
+import Card from '../../components/card';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
+
+import { getMarcas, deleteMarca } from '../../shared/api/marcas.api';
+
+import '../../custom.css';
 
 function ListagemMarcas() {
   const navigate = useNavigate();

@@ -1,15 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import Stack from '@mui/material/Stack';
 
-import '../../custom.css';
+import AddIcon from '@mui/icons-material/Add';
+
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
 import CardLocacao from '../../components/card-locacao';
-import AddIcon from '@mui/icons-material/Add';
 
-import { getLocacoes, deleteLocacao } from '../../api/locacoes.api';
-import { getCarros } from '../../api/carros.api';
+import { getLocacoes, deleteLocacao } from '../../shared/api/locacoes.api';
+import { getCarros } from '../../shared/api/carros.api';
+
+import '../../custom.css';
 
 function ListagemLocacoes() {
   const navigate = useNavigate();

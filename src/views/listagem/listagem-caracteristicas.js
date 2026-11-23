@@ -1,21 +1,20 @@
 import React from 'react';
-
-import Card from '../../components/card';
-
-import { mensagemSucesso, mensagemErro } from '../../components/toastr';
-
-import '../../custom.css';
-
 import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import { IconButton } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import { getCaracteristicas, deleteCaracteristica } from '../../api/caracteristicas.api';
+import Card from '../../components/card';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
+
+import { getCaracteristicas, deleteCaracteristica } from '../../shared/api/caracteristicas.api';
+
+import '../../custom.css';
 
 function ListagemCaracteristicas() {
   const navigate = useNavigate();
