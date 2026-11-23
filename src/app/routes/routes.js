@@ -20,6 +20,7 @@ import ListagemLocais from '../../views/listagem/listagem-locais';
 import Dashboard from '../../views/dashboard';
 
 import Login from '../../views/login';
+import SearchResults from '../../views/search';
 import Homepage from '../../views/homepage';
 import Layout from '../../components/layout';
 
@@ -35,6 +36,8 @@ function Rotas(){
                 <Route element={<Layout />}>
                     <Route element={<ProtectedRoutes />}>
                         <Route path="/" element={<Homepage />} />
+
+                        <Route path="/search/:idParam" element={<SearchResults />} />
 
                         <Route path='/cadastro-marcas/:idParam?' element={<CadastroMarcas />} />
                         <Route path='/cadastro-modelos/:idParam?' element={<CadastroModelos />} />
