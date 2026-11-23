@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import 'bootswatch/dist/lux/bootstrap.css';
+import { useLogin } from '../hooks/useLogin';
 
 function Login() {
   const navigate = useNavigate();
+  const { executeLogin, isLoading, error } = useLogin()
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  function submit(e) {
+  const submit = async (e) => {
     e.preventDefault();
+
+    const response = await executeLogin(email, senha);
+
+    if(!response) {
+      return
+    }
+
     navigate('/');
   }
 
@@ -20,7 +29,7 @@ function Login() {
         <div className='col-12 col-lg-6 d-flex align-items-center justify-content-center p-4 p-sm-5'>
           <div className='w-100' style={{ maxWidth: '400px' }}>
             <div className='mb-4'>
-              <h1 className='h2 mb-1'>Bem vindo de volta!</h1>
+              <h1 className='h2 mb-1'>Bem vindo</h1>
               <p className='text-muted small mb-0'>Coloque suas credenciais!</p>
             </div>
 
@@ -54,8 +63,9 @@ function Login() {
               </div>
 
               <button type='submit' className='btn btn-primary w-100'>
-                Entrar
+                {isLoading ? "Entrando ..." : "Entrar"}
               </button>
+              {error && <p>{error}</p>}
             </form>
           </div>
         </div>
