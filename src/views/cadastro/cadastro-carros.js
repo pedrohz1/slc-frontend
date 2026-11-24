@@ -132,7 +132,6 @@ function CadastroCarros() {
     }, [id]);
 
     if (!dados) return ( <Loading /> );
-    if (!modelo) return ( <Loading /> );
 
     return (
         <div className='container'>
@@ -140,7 +139,7 @@ function CadastroCarros() {
             <Card className='d-flex align-items-center shadow' sx={{ display: 'flex', bgcolor: '#f2f2f7', margin: '10px' }}>
                 <CardMedia
                     component="img"
-                    image={`${url}`}
+                    image={url || "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"}
                     className="object-fit-contain w-50"
                 />
                 <Box className='w-100 bg-secondary' sx={{ display: 'flex', flexDirection: 'column' }}>
