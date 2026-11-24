@@ -30,13 +30,32 @@ function ListagemMultas() {
   const [dados, setDados] = React.useState(null);
   const [pesquisa, setPesquisa] = React.useState('');
 
+  const exibirLocacao = (locacao) => {
+    if (locacao && typeof locacao === 'object') {
+      const placa = locacao.carro?.placa;
+      return placa ? `#${locacao.id} - ${placa}` : `#${locacao.id}`;
+    }
+    return locacao ?? '';
+  };
+
+  const exibirCliente = (cliente) => {
+    if (cliente && typeof cliente === 'object') return cliente.nome;
+    return cliente ?? '';
+  };
+
   const filtrarDados = () => {
     const consulta = String(pesquisa).trim().toLowerCase();
 
     if (!consulta) return dados;
 
     return dados.filter((e) =>
-      Object.values(e).some((texto) =>
+      [
+        e.tipoMulta,
+        e.valor,
+        e.descricao,
+        exibirLocacao(e.locacao),
+        exibirCliente(e.cliente),
+      ].some((texto) =>
         String(texto ?? '').toLowerCase().includes(consulta)
       )
     )
@@ -58,9 +77,14 @@ function ListagemMultas() {
   }
 
   React.useEffect(() => {
-    getMultas().then((lista) => {
-      setDados(lista);
-    });
+    getMultas()
+      .then((lista) => {
+        setDados(lista);
+      })
+      .catch(() => {
+        mensagemErro('Erro ao carregar as multas');
+        setDados([]);
+      });
   }, []);
 
   if (!dados) return null;
@@ -97,8 +121,8 @@ function ListagemMultas() {
                       <td>{dado.tipoMulta}</td>
                       <td>R${dado.valor}</td>
                       <td>{dado.descricao}</td>
-                      <td>{dado.locacao}</td>
-                      <td>{dado.cliente}</td>
+                      <td>{exibirLocacao(dado.locacao)}</td>
+                      <td>{exibirCliente(dado.cliente)}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
