@@ -15,6 +15,7 @@ import SearchBar from '../../components/search-bar';
 import { getCarros, deleteCarro } from '../../shared/api/carros.api';
 
 import '../../custom.css';
+import Loading from '../../components/loading';
 
 function ListagemCarros() {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ function ListagemCarros() {
     });
   }, []);
 
-  if (!dados) return null;
+  if (!dados) return ( <Loading /> );
 
   return (
     <div className='container'>

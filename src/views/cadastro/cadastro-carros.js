@@ -114,8 +114,8 @@ function CadastroCarros() {
         buscar(); // eslint-disable-next-line
     }, [id]);
 
-    if (!dados) return null;
-    if (!modelo) return null;
+    if (!dados) return ( <Loading /> );
+    if (!modelo) return ( <Loading /> );
 
     return (
         <div className='container'>
