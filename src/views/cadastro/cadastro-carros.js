@@ -8,6 +8,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Stack from '@mui/material/Stack';
 import Chip from '../../components/chip';
 
+import Loading from '../../components/loading';
+
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
 import { getCarroById, createCarro, updateCarro } from '../../shared/api/carros.api';
@@ -129,8 +131,8 @@ function CadastroCarros() {
         buscar(); // eslint-disable-next-line
     }, [id]);
 
-    if (!dados) return null;
-    if (!modelo) return null;
+    if (!dados) return ( <Loading /> );
+    if (!modelo) return ( <Loading /> );
 
     return (
         <div className='container'>
