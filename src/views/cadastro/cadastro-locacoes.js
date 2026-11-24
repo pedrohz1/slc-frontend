@@ -31,8 +31,11 @@ function CadastroLocacoes() {
   const [clientes, setClientes] = useState([]);
 
   function preencher(locacao) {
-    setCarro(locacao?.carro ?? '');
-    setUsuario(locacao?.usuario ?? '');
+    const carroId = typeof locacao?.carro === 'object' ? locacao?.carro?.id : locacao?.carro;
+    const usuarioId = typeof locacao?.usuario === 'object' ? locacao?.usuario?.id : locacao?.usuario;
+
+    setCarro(carroId != null ? String(carroId) : '');
+    setUsuario(usuarioId != null ? String(usuarioId) : '');
     setDataRetirada(locacao?.dataRetirada ?? '');
     setDataDevolucao(locacao?.dataDevolucao ?? '');
     setLocalRetirada(locacao?.localRetirada ?? '');
@@ -41,7 +44,13 @@ function CadastroLocacoes() {
   }
 
   function inicializar() {
-    preencher(dados);
+    setCarro('');
+    setUsuario('');
+    setDataRetirada('');
+    setDataDevolucao('');
+    setLocalRetirada('');
+    setLocalDevolucao('');
+    setStatus('em andamento');
   }
 
   async function salvar() {
@@ -109,7 +118,7 @@ function CadastroLocacoes() {
                 >
                   <option value=''>Selecione um carro</option>
                   {carros.map((c) => (
-                    <option key={c.id} value={c.id}>
+                    <option key={c.id} value={String(c.id)}>
                       {c.placa}
                     </option>
                   ))}
@@ -125,7 +134,7 @@ function CadastroLocacoes() {
                 >
                   <option value=''>Selecione um usuário</option>
                   {clientes.map((c) => (
-                    <option key={c.id} value={c.id}>
+                    <option key={c.id} value={String(c.id)}>
                       {c.nome}
                     </option>
                   ))}
