@@ -41,8 +41,8 @@ function CadastroCategorias() {
     if (idParam == null) {
       await createCategoria(data)
         .then(function () {
-          mensagemSucesso(`Marca ${nome} cadastrada com sucesso!`);
-          navigate(`/listagem-marcas`);
+          mensagemSucesso(`Categoria ${nome} cadastrada com sucesso!`);
+          navigate(`/listagem-categorias`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -50,8 +50,8 @@ function CadastroCategorias() {
     } else {
       await updateCategoria(idParam, data)
         .then(function () {
-          mensagemSucesso(`Marca ${nome} alterada com sucesso!`);
-          navigate(`/listagem-marcas`);
+          mensagemSucesso(`Categoria ${nome} alterada com sucesso!`);
+          navigate(`/listagem-categorias`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
