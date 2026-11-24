@@ -15,7 +15,7 @@ export default function CardLocacao({ car, client, image, status, date }) {
                 <CardContent sx={{ flex: '1 0 auto' }}>
 
                     <h3 component="div" variant="h5">
-                        {car.modelo + " - " + car.ano}
+                        {car.modelo + " - " + car.placa + " - " + car.ano}
                     </h3>
                     <div
                         variant="subtitle1"

@@ -8,6 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
+import Loading from '../../components/loading';
+
 import Card from '../../components/card';
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
@@ -63,7 +65,7 @@ function ListagemLocais() {
         });
     }, []);
 
-    if (!dados) return null;
+    if (!dados) return (<Loading />);
 
     return (
         <div className='container'>

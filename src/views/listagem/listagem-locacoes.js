@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
 
+import Loading from '../../components/loading';
+
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
 import CardLocacao from '../../components/card-locacao';
@@ -81,9 +83,9 @@ function ListagemLocacoes() {
             ...locacao,
             carro: carroEncontrado
               ? {
-                  ...carroEncontrado,
-                  modelo: modeloEncontrado?.nome || carroEncontrado.modelo,
-                }
+                ...carroEncontrado,
+                modelo: modeloEncontrado?.nome || carroEncontrado.modelo,
+              }
               : locacao.carro,
             usuario: clienteEncontrado,
           };
@@ -97,6 +99,8 @@ function ListagemLocacoes() {
 
     carregarDados();
   }, []);
+
+  if (!dados) return (<Loading />);
 
   return (
     <div className='container'>

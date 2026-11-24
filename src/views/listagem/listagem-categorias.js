@@ -8,6 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
+import Loading from '../../components/loading';
+
 import Card from '../../components/card';
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
@@ -28,19 +30,19 @@ function ListagemCategorias() {
   };
 
   const [dados, setDados] = React.useState(null);
-    const [pesquisa, setPesquisa] = React.useState('');
-  
-    const filtrarDados = () => {
-          const consulta = String(pesquisa).trim().toLowerCase();
-  
-          if(!consulta) return dados;
-  
-          return dados.filter((e) =>
-              Object.values(e).some((texto) =>
-                  String(texto ?? '').toLowerCase().includes(consulta)
-              )
-          )
-      }
+  const [pesquisa, setPesquisa] = React.useState('');
+
+  const filtrarDados = () => {
+    const consulta = String(pesquisa).trim().toLowerCase();
+
+    if (!consulta) return dados;
+
+    return dados.filter((e) =>
+      Object.values(e).some((texto) =>
+        String(texto ?? '').toLowerCase().includes(consulta)
+      )
+    )
+  }
 
   async function excluir(id) {
     await deleteCategoria(id)
@@ -63,7 +65,7 @@ function ListagemCategorias() {
     });
   }, []);
 
-  if(!dados) return null;
+  if (!dados) return (<Loading />);
 
   return (
     <div className='container'>
@@ -78,7 +80,7 @@ function ListagemCategorias() {
                 spacing={80}
                 sx={{ mb: 2 }}
               >
-                <SearchBar label={"Pesquisar categorias"} onSearch={setPesquisa}  />
+                <SearchBar label={"Pesquisar categorias"} onSearch={setPesquisa} />
               </Stack>
               <table className='table table-hover'>
                 <thead>
@@ -121,7 +123,7 @@ function ListagemCategorias() {
         style={{ width: '75px', height: '75px', aspectRatio: '1 / 1', }}
         onClick={() => cadastrar()}
       >
-        <AddIcon style={{ fontSize: '36px' }}/>
+        <AddIcon style={{ fontSize: '36px' }} />
       </button>
     </div>
   );

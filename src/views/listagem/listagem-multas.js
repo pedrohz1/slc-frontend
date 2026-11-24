@@ -15,6 +15,7 @@ import SearchBar from '../../components/search-bar';
 import { getMultas, deleteMulta } from '../../shared/api/multas.api';
 
 import '../../custom.css';
+import Loading from '../../components/loading';
 
 function ListagemMultas() {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ function ListagemMultas() {
       });
   }, []);
 
-  if (!dados) return null;
+  if (!dados) return (<Loading />);
 
   return (
     <div className='container'>
