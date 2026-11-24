@@ -130,7 +130,6 @@ function CadastroCarros() {
     }, [id]);
 
     if (!dados) return null;
-    if (!modelo) return null;
 
     return (
         <div className='container'>
