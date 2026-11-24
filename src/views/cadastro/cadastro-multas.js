@@ -54,7 +54,7 @@ function CadastroMultas() {
 
     const selecionada = locacoes.find((l) => l.id === Number(idLocacao));
     if (selecionada?.usuario) {
-      setCliente(selecionada.usuario);
+      setCliente(selecionada.usuario.nome);
     }
   }
 
@@ -168,7 +168,7 @@ function CadastroMultas() {
                       <option value=''>Selecione uma locação</option>
                       {locacoes.map((l) => (
                         <option key={l.id} value={l.id}>
-                          #{l.id} - {nomeCliente(l.usuario.nome)} ({l.dataRetirada} a {l.dataDevolucao})
+                          #{l.id} - {(l.usuario.nome)} ({l.dataRetirada} a {l.dataDevolucao})
                         </option>
                       ))}
                     </select>
