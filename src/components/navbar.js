@@ -4,9 +4,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import { useAuth } from '../context/auth.context';
 
 function Navbar() {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const [searchInput, setSearchInput ] = useState("");
 
   const searchSubmit = (e) => {
@@ -53,6 +55,10 @@ function Navbar() {
               <div className="dropdown-menu rounded">
                 <a className="dropdown-item" href="/listagem-locais">Locais</a>
                 <a className="dropdown-item" href="/dashboard">Dashboard</a>
+                <div className="dropdown-divider"></div>
+                <div className="px-3 py-1">
+                  <button type="button" className="btn btn-danger btn-sm rounded-pill px-3 py-1" onClick={() => logout()}>Sair</button>
+                </div>
               </div>
             </li>
           </ul>
