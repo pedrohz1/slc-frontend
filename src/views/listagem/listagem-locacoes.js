@@ -123,7 +123,7 @@ function ListagemLocacoes() {
           }
           date={{ retirada: dado.dataRetirada, devolucao: dado.dataDevolucao }}
           status={dado.status}
-          onEdit={() => editar(dado.id)}
+          link={() => editar(dado.id)}
           onDelete={() => excluir(dado.id)}
         />
       ))}

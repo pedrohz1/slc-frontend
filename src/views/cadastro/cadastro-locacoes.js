@@ -24,7 +24,6 @@ function CadastroLocacoes() {
   const [dataDevolucao, setDataDevolucao] = useState('');
   const [localRetirada, setLocalRetirada] = useState('');
   const [localDevolucao, setLocalDevolucao] = useState('');
-  const [valorDiaria, setValorDiaria] = useState('');
   const [status, setStatus] = useState('em andamento');
 
   const [dados, setDados] = useState(null);
@@ -38,7 +37,6 @@ function CadastroLocacoes() {
     setDataDevolucao(locacao?.dataDevolucao ?? '');
     setLocalRetirada(locacao?.localRetirada ?? '');
     setLocalDevolucao(locacao?.localDevolucao ?? '');
-    setValorDiaria(locacao?.valorDiaria ?? '');
     setStatus(locacao?.status ?? 'em andamento');
   }
 
@@ -55,7 +53,6 @@ function CadastroLocacoes() {
       dataDevolucao,
       localRetirada,
       localDevolucao,
-      valorDiaria: Number(valorDiaria),
       status,
     };
 
@@ -187,18 +184,6 @@ function CadastroLocacoes() {
                 </div>
               </div>
               <div className='row'>
-                <div className='col-md-6'>
-                  <FormGroup label='Valor da diária: *' htmlFor='inputValorDiaria'>
-                    <input
-                      type='number'
-                      id='inputValorDiaria'
-                      value={valorDiaria}
-                      className='form-control rounded-pill m-1'
-                      name='valorDiaria'
-                      onChange={(e) => setValorDiaria(e.target.value)}
-                    />
-                  </FormGroup>
-                </div>
                 <div className='col-md-6'>
                   <FormGroup label='Status: *' htmlFor='selectStatus'>
                     <select
