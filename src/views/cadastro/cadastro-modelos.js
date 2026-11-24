@@ -8,8 +8,15 @@ import FormGroup from '../../components/form-group';
 import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
 import { getModeloById, createModelo, updateModelo } from '../../shared/api/modelos.api';
+import { getMarcas } from '../../shared/api/marcas.api';
+import { getCategorias } from '../../shared/api/categorias.api';
 
 import '../../custom.css';
+
+function idDe(valor) {
+  if (valor && typeof valor === 'object') return valor.id;
+  return valor ?? '';
+}
 
 function CadastroModelos() {
   const { idParam } = useParams();
@@ -19,30 +26,47 @@ function CadastroModelos() {
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
   const [marca, setMarca] = useState('');
-  const [categoria, setCategoria] = useState([]);
+  const [categoria, setCategoria] = useState('');
+
+  const [listaMarcas, setListaMarcas] = useState([]);
+  const [listaCategorias, setListaCategorias] = useState([]);
 
   const [dados, setDados] = useState([]);
+
+  function preencher(dado) {
+    setId(dado.id);
+    setNome(dado.nome);
+    setMarca(idDe(dado.marca));
+    setCategoria(idDe(dado.categorias?.[0]));
+  }
 
   function inicializar() {
     if (idParam == null) {
       setId('');
+      setNome('');
+      setMarca('');
+      setCategoria('');
     } else {
-      setId(dados.id);
-      setNome(dados.nome);
-      setMarca(dados.marca);
-      setCategoria(dados.categorias);
+      preencher(dados);
     }
   }
 
   async function salvar() {
+    const marcaSelecionada = listaMarcas.find((m) => String(m.id) === String(marca));
+    const categoriaSelecionada = listaCategorias.find(
+      (c) => String(c.id) === String(categoria)
+    );
+
     let data = {
       id,
       nome,
+      marca: marcaSelecionada,
+      categorias: categoriaSelecionada ? [categoriaSelecionada] : [],
     };
     if (idParam == null) {
       await createModelo(data)
         .then(function () {
-          mensagemSucesso(`Marca ${nome} cadastrada com sucesso!`);
+          mensagemSucesso(`Modelo ${nome} cadastrado com sucesso!`);
           navigate(`/listagem-modelos`);
         })
         .catch(function (error) {
@@ -51,7 +75,7 @@ function CadastroModelos() {
     } else {
       await updateModelo(idParam, data)
         .then(function () {
-          mensagemSucesso(`Marca ${nome} alterada com sucesso!`);
+          mensagemSucesso(`Modelo ${nome} alterado com sucesso!`);
           navigate(`/listagem-modelos`);
         })
         .catch(function (error) {
@@ -61,24 +85,19 @@ function CadastroModelos() {
   }
 
   async function buscar() {
+    setListaMarcas(await getMarcas());
+    setListaCategorias(await getCategorias());
+
     if (idParam) {
-      await getModeloById(idParam).then((dado) => {
-        setDados(dado);
-      });
+      const dado = await getModeloById(idParam);
+      setDados(dado);
+      preencher(dado);
     }
-    setId(dados.id);
-    setNome(dados.nome)
-    setMarca(dados.marca)
-    setCategoria(dados.categorias)
   }
 
   useEffect(() => {
     buscar(); // eslint-disable-next-line
-  }, [id]);
-
-  if (!dados) return null;
-  if (!marca) return null;
-  if (!categoria) return null;
+  }, [idParam]);
 
   return (
     <div className='container'>
@@ -97,24 +116,36 @@ function CadastroModelos() {
                 />
               </FormGroup>
               <FormGroup label='Marca: *' htmlFor='inputMarca'>
-                <input
-                  type='text'
+                <select
                   id='inputMarca'
-                  value={marca.nome}
-                  className='form-control m-2 rounded-pill'
+                  value={marca}
+                  className='form-select m-2 rounded-pill'
                   name='marca'
                   onChange={(e) => setMarca(e.target.value)}
-                />
+                >
+                  <option value=''>Selecione...</option>
+                  {listaMarcas.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <FormGroup label='Categoria: *' htmlFor='inputCategoria'>
-                <input
-                  type='text'
+                <select
                   id='inputCategoria'
-                  value={categoria[0].nome}
-                  className='form-control m-2 rounded-pill'
+                  value={categoria}
+                  className='form-select m-2 rounded-pill'
                   name='categoria'
                   onChange={(e) => setCategoria(e.target.value)}
-                />
+                >
+                  <option value=''>Selecione...</option>
+                  {listaCategorias.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row-reverse'>
                 <button
