@@ -10,6 +10,7 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import { getMultaById, createMulta, updateMulta } from '../../shared/api/multas.api';
 import { getLocacoes } from '../../shared/api/locacoes.api';
 import { getClientes } from '../../shared/api/clientes.api';
+import { formatarMoeda, lerMoeda } from '../../shared/utils/moeda';
 
 import '../../custom.css';
 
@@ -17,6 +18,11 @@ const TIPOS_MULTA = [
   { valor: 'Infração de trânsito', label: 'Infração' },
   { valor: 'Atraso', label: 'Atraso na locação' },
 ];
+
+function extrairId(relacao) {
+  const id = typeof relacao === 'object' ? relacao?.id : relacao;
+  return id ?? '';
+}
 
 function CadastroMultas() {
   const { idParam } = useParams();
@@ -37,8 +43,8 @@ function CadastroMultas() {
     setTipoMulta(multa?.tipoMulta ?? '');
     setValor(multa?.valor ?? '');
     setDescricao(multa?.descricao ?? '');
-    setLocacao(multa?.locacao ?? '');
-    setCliente(multa?.cliente ?? '');
+    setLocacao(extrairId(multa?.locacao));
+    setCliente(extrairId(multa?.cliente));
   }
 
   function inicializar() {
@@ -54,7 +60,7 @@ function CadastroMultas() {
 
     const selecionada = locacoes.find((l) => l.id === Number(idLocacao));
     if (selecionada?.usuario) {
-      setCliente(selecionada.usuario.nome);
+      setCliente(extrairId(selecionada.usuario));
     }
   }
 
@@ -133,14 +139,14 @@ function CadastroMultas() {
                 <div className='col-md-6'>
                   <FormGroup label='Valor: *' htmlFor='inputValor'>
                     <input
-                      type='number'
-                      step='0.01'
-                      min='0'
+                      type='text'
+                      inputMode='numeric'
+                      placeholder='R$ 0,00'
                       id='inputValor'
-                      value={valor}
+                      value={formatarMoeda(valor)}
                       className='form-control rounded-pill m-2'
                       name='valor'
-                      onChange={(e) => setValor(e.target.value)}
+                      onChange={(e) => setValor(lerMoeda(e.target.value))}
                     />
                   </FormGroup>
                 </div>

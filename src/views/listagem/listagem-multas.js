@@ -13,6 +13,7 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import SearchBar from '../../components/search-bar';
 
 import { getMultas, deleteMulta } from '../../shared/api/multas.api';
+import { formatarMoeda } from '../../shared/utils/moeda';
 
 import '../../custom.css';
 import Loading from '../../components/loading';
@@ -53,6 +54,7 @@ function ListagemMultas() {
       [
         e.tipoMulta,
         e.valor,
+        formatarMoeda(e.valor),
         e.descricao,
         exibirLocacao(e.locacao),
         exibirCliente(e.cliente),
@@ -120,7 +122,7 @@ function ListagemMultas() {
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.tipoMulta}</td>
-                      <td>R${dado.valor}</td>
+                      <td>{formatarMoeda(dado.valor) || '-'}</td>
                       <td>{dado.descricao}</td>
                       <td>{exibirLocacao(dado.locacao)}</td>
                       <td>{exibirCliente(dado.cliente)}</td>
