@@ -93,8 +93,8 @@ function ListagemModelos() {
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
-                      <td>{dado.marca}</td>
-                      <td>{dado.categorias}</td>
+                      <td>{dado.marca.nome}</td>
+                      <td>{dado.categorias[0].nome}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
