@@ -25,7 +25,9 @@ function CadastroClientes() {
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [cnh, setCnh] = useState('');
+    const [numCnh, setNumCnh] = useState('');
+    const [categoriaCnh, setCategoriaCnh] = useState('');
+    const [validadeCnh, setValidadeCnh] = useState('');
 
     const [dados, setDados] = useState([]);
 
@@ -38,7 +40,9 @@ function CadastroClientes() {
             setEmail(dados.email);
             setCpf(dados.cpf);
             setTelefone(dados.telefone);
-            setCnh(dados.cnh);
+            setNumCnh(dados.numCnh);
+            setCategoriaCnh(dados.categoriaCnh);
+            setValidadeCnh(dados.validadeCnh);
         }
     }
 
@@ -49,7 +53,9 @@ function CadastroClientes() {
             nome,
             cpf,
             telefone,
-            cnh
+            numCnh,
+            categoriaCnh,
+            validadeCnh
         };
         data = JSON.stringify(data);
         if (idParam == null) {
@@ -88,7 +94,9 @@ function CadastroClientes() {
         setEmail(dados.email);
         setCpf(dados.cpf);
         setTelefone(dados.telefone);
-        setCnh(dados.cnh);
+        setNumCnh(dados.numeroCnh);
+        setCategoriaCnh(dados.categoriaCnh);
+        setValidadeCnh(dados.validadeCnh);
     }
 
     useEffect(() => {
@@ -143,14 +151,44 @@ function CadastroClientes() {
                                     onChange={(e) => setTelefone(e.target.value)}
                                 />
                             </FormGroup>
-                            <FormGroup label='CNH: *' htmlFor='inputCnh'>
+                            <FormGroup label='Número da CNH: *' htmlFor='inputNumCnh'>
                                 <input
-                                    type='text'
-                                    id='inputCnh'
-                                    value={cnh}
+                                    type='number'
+                                    id='inputNumCnh'
+                                    value={numCnh}
                                     className='form-control m-2 rounded-pill'
-                                    name='cnh'
-                                    onChange={(e) => setCnh(e.target.value)}
+                                    name='numCnh'
+                                    onChange={(e) => setNumCnh(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Categoria da CNH: *' htmlFor='inputCategoriaCnh'>
+                                <select
+                                    id='inputCategoriaCnh'
+                                    value={categoriaCnh}
+                                    className='form-select m-2 rounded-pill'
+                                    name='categoriaCnh'
+                                    onChange={(e) => setCategoriaCnh(e.target.value)}
+                                >
+                                    <option value=''>Selecione...</option>
+                                    <option key={'A'} value={'A'}>
+                                        {'A'}
+                                    </option>
+                                    <option key={'B'} value={'B'}>
+                                        {'B'}
+                                    </option>
+                                    <option key={'C'} value={'C'}>
+                                        {'C'}
+                                    </option>
+                                </select>
+                            </FormGroup>
+                            <FormGroup label='Validade da CNH: *' htmlFor='inputValidadeCnh'>
+                                <input
+                                    type='date'
+                                    id='inputValidadeCnh'
+                                    value={validadeCnh}
+                                    className='form-control m-2 rounded-pill'
+                                    name='numCnh'
+                                    onChange={(e) => setValidadeCnh(e.target.value)}
                                 />
                             </FormGroup>
                             <Stack spacing={1} padding={1} direction='row-reverse'>
