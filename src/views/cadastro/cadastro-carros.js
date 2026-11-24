@@ -15,6 +15,7 @@ import { getCarroById, createCarro, updateCarro } from '../../shared/api/carros.
 import '../../custom.css';
 import CarFormGroup from '../../components/car-form-group';
 import { getCaracteristicas } from '../../shared/api/caracteristicas.api';
+import { getModelos } from '../../shared/api/modelos.api';
 
 function CadastroCarros() {
     const { idParam } = useParams();
@@ -32,6 +33,7 @@ function CadastroCarros() {
     const [url, setUrl] = useState('');
 
     const [opcoesCaracteristicas, setOpcoesCaracteristicas] = useState([]);
+    const [opcoesModelos, setOpcoesModelos] = useState([]);
 
     const [dados, setDados] = useState([]);
 
@@ -41,7 +43,7 @@ function CadastroCarros() {
         } else {
             setId(dados.id);
             setPlaca(dados.placa);
-            setModelo(dados.modelo);
+            setModelo(idDoModelo(dados.modelo));
             setAno(dados.ano);
             setCor(dados.cor);
             setKmRodados(dados.kmRodados);
@@ -51,10 +53,15 @@ function CadastroCarros() {
         }
     }
 
+    function idDoModelo(valor) {
+        if (valor && typeof valor === 'object') return valor.id;
+        return valor ?? '';
+    }
+
     async function salvar() {
         let data = {
             id,
-            modelo,
+            modelo: Number(modelo),
             cor,
             status,
             kmRodados,
@@ -94,6 +101,14 @@ function CadastroCarros() {
             }))
         );
 
+        const listaModelos = await getModelos();
+        setOpcoesModelos(
+            listaModelos.map((m) => ({
+                value: m.id,
+                label: m.nome,
+            }))
+        );
+
         if (idParam) {
             await getCarroById(idParam).then((dado) => {
                 setDados(dado);
@@ -101,7 +116,7 @@ function CadastroCarros() {
         }
         setId(dados.id);
         setPlaca(dados.placa);
-        setModelo(dados.modelo);
+        setModelo(idDoModelo(dados.modelo));
         setAno(dados.ano);
         setCor(dados.cor);
         setKmRodados(dados.kmRodados);
@@ -139,14 +154,20 @@ function CadastroCarros() {
                                 />
                             </CarFormGroup>
                             <CarFormGroup label='Modelo: *' htmlFor='inputModelo'>
-                                <input
-                                    type='text'
+                                <select
                                     id='inputModelo'
                                     value={modelo}
-                                    className='form-control rounded-4 m-1'
+                                    className='form-select rounded-4 m-1'
                                     name='modelo'
                                     onChange={(e) => setModelo(e.target.value)}
-                                />
+                                >
+                                    <option value=''>Selecione...</option>
+                                    {opcoesModelos.map((opcao) => (
+                                        <option key={opcao.value} value={opcao.value}>
+                                            {opcao.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </CarFormGroup>
                             <CarFormGroup label='Ano: *' htmlFor='inputAno'>
                                 <input
