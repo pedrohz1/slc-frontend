@@ -84,6 +84,7 @@ function ListagemCarros() {
               <table className='table table-hover'>
                 <thead>
                   <tr>
+                    <th scope='col'>Foto</th>
                     <th scope='col'>Placa</th>
                     <th scope='col'>Modelo</th>
                     <th scope='col'>Cor</th>
@@ -96,6 +97,18 @@ function ListagemCarros() {
                 <tbody>
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
+                      <td>
+                        {dado.url ? (
+                          <img
+                            src={dado.url}
+                            alt={`Foto do carro ${dado.placa}`}
+                            className='rounded'
+                            style={{ width: '100px', height: '60px', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          'Sem foto'
+                        )}
+                      </td>
                       <td>{dado.placa}</td>
                       <td>{dado.modelo.nome}</td>
                       <td>{dado.cor}</td>
