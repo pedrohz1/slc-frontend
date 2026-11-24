@@ -14,7 +14,7 @@ const ACOES = [
   { titulo: 'Nova locação', descricao: 'Alugar um carro', icone: CarRentalIcon, cor: 'primary', rota: '/cadastro-locacoes' },
   { titulo: 'Novo cliente', descricao: 'Cadastrar cliente', icone: PersonAddIcon, cor: 'info', rota: '/cadastro-clientes' },
   { titulo: 'Registrar multa', descricao: 'Infração ou atraso', icone: ReportProblemIcon, cor: 'danger', rota: '/cadastro-multas' },
-  { titulo: 'Finalizar locação', descricao: 'Registrar devolução', icone: EventAvailableIcon, cor: 'success', rota: '/locacoes-ativas' },
+  { titulo: 'Finalizar locação', descricao: 'Alterar status de devolução', icone: EventAvailableIcon, cor: 'success', rota: '/listagem-locacoes' },
   { titulo: 'Ver ganhos', descricao: 'Resumo financeiro', icone: AttachMoneyIcon, cor: 'warning', rota: '/dashboard' },
 ];
 
