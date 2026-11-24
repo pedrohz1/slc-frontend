@@ -96,7 +96,7 @@ function ListagemCarros() {
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.placa}</td>
-                      <td>{dado.modelo}</td>
+                      <td>{dado.modelo.nome}</td>
                       <td>{dado.cor}</td>
                       <td>{dado.status}</td>
                       <td>{dado.kmRodados}</td>

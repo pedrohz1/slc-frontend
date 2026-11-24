@@ -86,8 +86,10 @@ function ListagemClientes() {
                     <th scope='col'>Nome</th>
                     <th scope='col'>Email</th>
                     <th scope='col'>CPF</th>
-                    <th scope='col'>telefone</th>
-                    <th scope='col'>CNH</th>
+                    <th scope='col'>Telefone</th>
+                    <th scope='col'>Número da CNH</th>
+                    <th scope='col'>Categoria da CNH</th>
+                    <th scope='col'>Validade da CNH</th>
                     <th scope='col'>Ações</th>
                   </tr>
                 </thead>
@@ -98,7 +100,9 @@ function ListagemClientes() {
                       <td>{dado.email}</td>
                       <td>{dado.cpf}</td>
                       <td>{dado.telefone}</td>
-                      <td>{dado.cnh}</td>
+                      <td>{dado.numeroCnh}</td>
+                      <td>{dado.categoriaCnh}</td>
+                      <td>{dado.validadeCnh}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
