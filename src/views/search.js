@@ -86,7 +86,7 @@ function SearchResults() {
             rota: "/cadastro-carros",
             colunas: [
                 { label: "Placa", valor: (c) => c.placa },
-                { label: "Modelo", valor: (c) => nomePorId(modelos, c.modelo) },
+                { label: "Modelo", valor: (c) => nomePorId(modelos, c.modelo.nome) },
                 { label: "Cor", valor: (c) => c.cor },
                 { label: "Ano", valor: (c) => c.ano },
                 { label: "Km", valor: (c) => c.kmRodados },
@@ -99,7 +99,7 @@ function SearchResults() {
             rota: "/cadastro-modelos",
             colunas: [
                 { label: "Nome", valor: (m) => m.nome },
-                { label: "Marca", valor: (m) => nomePorId(marcas, m.marca) },
+                { label: "Marca", valor: (m) => nomePorId(marcas, m.marca.nome) },
             ],
         },
         {
