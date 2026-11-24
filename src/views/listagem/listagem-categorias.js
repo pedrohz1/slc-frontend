@@ -86,6 +86,7 @@ function ListagemCategorias() {
                 <thead>
                   <tr>
                     <th scope='col'>Nome</th>
+                    <th scope='col'>Valor da diária</th>
                     <th scope='col'>Ações</th>
                   </tr>
                 </thead>
@@ -93,6 +94,14 @@ function ListagemCategorias() {
                   {filtrarDados().map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
+                      <td>
+                        {dado.valorDiaria != null
+                          ? Number(dado.valorDiaria).toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                            })
+                          : '-'}
+                      </td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

@@ -18,6 +18,7 @@ function CadastroCategorias() {
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
+  const [valorDiaria, setValorDiaria] = useState('');
 
   const [dados, setDados] = useState([]);
 
@@ -27,6 +28,7 @@ function CadastroCategorias() {
     } else {
       setId(dados.id);
       setNome(dados.nome);
+      setValorDiaria(dados.valorDiaria ?? '');
     }
   }
 
@@ -34,6 +36,7 @@ function CadastroCategorias() {
     let data = {
       id,
       nome,
+      valorDiaria: Number(valorDiaria),
     };
     if (idParam == null) {
       await createCategoria(data)
@@ -64,6 +67,7 @@ function CadastroCategorias() {
     }
     setId(dados.id);
     setNome(dados.nome)
+    setValorDiaria(dados.valorDiaria ?? '');
   }
 
   useEffect(() => {
@@ -86,6 +90,18 @@ function CadastroCategorias() {
                   className='form-control m-2 rounded-pill'
                   name='nome'
                   onChange={(e) => setNome(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup label='Valor da diária: *' htmlFor='inputValorDiaria'>
+                <input
+                  type='number'
+                  id='inputValorDiaria'
+                  value={valorDiaria}
+                  min='0'
+                  step='0.01'
+                  className='form-control m-2 rounded-pill'
+                  name='valorDiaria'
+                  onChange={(e) => setValorDiaria(e.target.value)}
                 />
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row-reverse'>
