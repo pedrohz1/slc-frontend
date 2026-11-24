@@ -168,7 +168,7 @@ function CadastroMultas() {
                       <option value=''>Selecione uma locação</option>
                       {locacoes.map((l) => (
                         <option key={l.id} value={l.id}>
-                          #{l.id} - {nomeCliente(l.usuario)} ({l.dataRetirada} a {l.dataDevolucao})
+                          #{l.id} - {nomeCliente(l.usuario.nome)} ({l.dataRetirada} a {l.dataDevolucao})
                         </option>
                       ))}
                     </select>
