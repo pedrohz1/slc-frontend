@@ -77,6 +77,8 @@ function CadastroModelos() {
   }, [id]);
 
   if (!dados) return null;
+  if (!marca) return null;
+  if (!categoria) return null;
 
   return (
     <div className='container'>
@@ -98,7 +100,7 @@ function CadastroModelos() {
                 <input
                   type='text'
                   id='inputMarca'
-                  value={marca}
+                  value={marca.nome}
                   className='form-control m-2 rounded-pill'
                   name='marca'
                   onChange={(e) => setMarca(e.target.value)}
@@ -108,7 +110,7 @@ function CadastroModelos() {
                 <input
                   type='text'
                   id='inputCategoria'
-                  value={categoria}
+                  value={categoria[0].nome}
                   className='form-control m-2 rounded-pill'
                   name='categoria'
                   onChange={(e) => setCategoria(e.target.value)}

@@ -115,6 +115,7 @@ function CadastroCarros() {
     }, [id]);
 
     if (!dados) return null;
+    if (!modelo) return null;
 
     return (
         <div className='container'>
@@ -142,7 +143,7 @@ function CadastroCarros() {
                                 <input
                                     type='text'
                                     id='inputModelo'
-                                    value={modelo}
+                                    value={modelo.nome}
                                     className='form-control rounded-4 m-1'
                                     name='modelo'
                                     onChange={(e) => setModelo(e.target.value)}
